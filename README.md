@@ -21,18 +21,18 @@ Connect your GitHub repository and deploy as normal.
 
 The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
-Purpose of the project
-user stories
-Features
+## Purpose of the project
+## User stories
+## Features
 future features
-wireframes
-Technology
-testing
-code validation
-test cases (user story based with screenshots)
-fixed bugs
-supported screens and browsers
-Deployment
+## Wireframes
+## Technology
+## testing
+## Code validation
+## Test cases (user story based with screenshots)
+## Fixed bugs
+## Supported screens and browsers
+## Deployment
 via gitpod
 via github pages
-credits
+## Credits
