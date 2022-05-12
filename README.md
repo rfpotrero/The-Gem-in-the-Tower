@@ -22,7 +22,14 @@ Connect your GitHub repository and deploy as normal.
 The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
 ## Purpose of the project
+* The Gem in the Tower is an old school adventure text base. Paying homage to Robert E Howard's Conan. 
+* The purpose of the game is ascend the tower and reclaim the Gem from the final enemey.
 ## User stories
+* A user wants to play the game 
+* A user can progress via the game.
+* A user can fight any creature that appear
+* A user can keep track of their HP 
+* A user will be able to rest to recover HP
 ## Features
 future features
 ## Wireframes
