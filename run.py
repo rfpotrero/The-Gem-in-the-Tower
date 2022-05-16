@@ -55,10 +55,34 @@ def encounter():
     """
     This is used to represent the fight with a monster and advance to the next tower's level
     """
+    print("The player attack!")
+    player_hit()
+    print("The monster attack!")    
+    monster_hit()
+
+
+
+def player_hit():
+    """
+    Fuction used to calculate if an injuried is inflicted
+    """
     player_attack = attack_roll(player1.attack)
-    print(player_attack)
+    if player_attack  >= monster1.armour:
+        print("The player hit the monster")
+        monster1.hp = monster1.hp - 1
+    else:
+        print("The attack failed")
+
+def monster_hit():
+    """
+    Fuction used to calculate if an injuried is inflicted
+    """
     monster_attack = attack_roll(monster1.attack)
-    print(monster_attack)
+    if monster_attack  >= player1.armour:
+        print("The monster hit the player")
+        player1.hp = player1.hp - 1
+    else:
+        print("The attack failed")    
 
 
 monster1 = Monster()
