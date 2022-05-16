@@ -51,15 +51,34 @@ def attack_roll(number_of_dices):
     attack_roll = sum(results)
     return attack_roll
 
+def dice_roll(number_of_dices):
+    """
+    Generic functions to resolve any other roll dices
+    """
+    results =[]
+    for dice in range(number_of_dices):
+        roll = random.randint(1,6)
+        results.append(roll)
+    dice_result = sum[results]
+    return dice_result
+
+
+
 def encounter():
     """
     This is used to represent the fight with a monster and advance to the next tower's level
     """
-    print("The player attack!")
-    player_hit()
-    print("The monster attack!")    
-    monster_hit()
+    print("Fight Starts")
+    while monster1.hp > 0 and player1.hp > 0:
+        print("The player attack!")
+        player_hit()
+        print(monster1.hp)
+        print("The monster attack!")    
+        monster_hit()
+        print(player1.hp)
+        
 
+    print("Fight is over")
 
 
 def player_hit():
@@ -82,7 +101,9 @@ def monster_hit():
         print("The monster hit the player")
         player1.hp = player1.hp - 1
     else:
-        print("The attack failed")    
+        print("The attack failed")   
+
+ 
 
 
 monster1 = Monster()
