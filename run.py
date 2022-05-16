@@ -16,6 +16,7 @@ class Player:
         self.hp = hp
         self.attack = attack
         self.initiative = initiative
+        self.armour = 12
         
         
 
@@ -31,6 +32,7 @@ class Monster:
         self.hp = hp
         self.attack = attack
         self.initiative = initiative
+        self.armour = 10
         
 
 def chance_of_event():
@@ -53,14 +55,13 @@ def encounter():
     """
     This is used to represent the fight with a monster and advance to the next tower's level
     """
+    player_attack = attack_roll(player1.attack)
+    print(player_attack)
+    monster_attack = attack_roll(monster1.attack)
+    print(monster_attack)
 
-    monster1 = Monster()
 
+monster1 = Monster()
+player1 = Player()
 
-
-
-def fight():
-    """
-    Calculate the result of a fight
-    """
-
+encounter()
