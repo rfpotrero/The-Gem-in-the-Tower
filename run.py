@@ -2,8 +2,7 @@
 from pydoc import ModuleScanner
 import random
 import math
-
-print("This is the first stage")
+from re import M
 
 class Player:
     """
@@ -17,8 +16,7 @@ class Player:
         self.attack = attack
         self.initiative = initiative
         self.armour = 12
-        
-        
+        self.name = ""
 
 class Monster:
     """
@@ -62,23 +60,21 @@ def dice_roll(number_of_dices):
     dice_result = sum[results]
     return dice_result
 
-
-
 def encounter():
     """
     This is used to represent the fight with a monster and advance to the next tower's level
     """
     print("Fight Starts")
-    while monster1.hp > 0 and player1.hp > 0:
-        print("The player attack!")
-        player_hit()
-        print(monster1.hp)
-        print("The monster attack!")    
-        monster_hit()
-        print(player1.hp)
-        
-
-    print("Fight is over")
+    monster_alive = True
+    player_alive = True
+    while monster_alive == True:
+        player_attack = attack_roll(player1.attack)
+        if player_attack  >= monster1.armour:
+            print("The player hit the monster")
+            monster1.hp = monster1.hp - 1
+    
+        else:
+            print("The player attack failed")
 
 
 def player_hit():
@@ -90,7 +86,8 @@ def player_hit():
         print("The player hit the monster")
         monster1.hp = monster1.hp - 1
     else:
-        print("The attack failed")
+        print("The player attack failed")
+   
 
 def monster_hit():
     """
@@ -101,12 +98,17 @@ def monster_hit():
         print("The monster hit the player")
         player1.hp = player1.hp - 1
     else:
-        print("The attack failed")   
+        print("The monster attack failed")   
 
- 
-
-
-monster1 = Monster()
-player1 = Player()
-
-encounter()
+def main_game():
+    """
+    Main Game function
+    """
+    player_character = Player()
+    while True:
+        player_character.name = input("Welcome to the tower what is your name adveturer?")
+        if player_character.name.isalpha():
+            print(f"Very well {player_character.name} you are free to enter")
+            break
+        else:
+            print("I am afraid do not understsand that. Can you say it again?")
