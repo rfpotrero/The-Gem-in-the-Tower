@@ -18,10 +18,10 @@ class Player:
     def __init__(self):
         hp = random.randint(1, 3)
         attack = random.randint(2, 3)
-        initiative = random.randint(1, 6)
+        # initiative = random.randint(1, 6)
         self.hp = hp
         self.attack = attack
-        self.initiative = initiative
+        self.initiative = 1
         self.armour = 12
         self.name = ""
 
@@ -35,10 +35,10 @@ class Monster:
 
         hp = 1
         attack = random.randint(2, 3)
-        initiative = random.randint(1, 6)
+        # initiative = random.randint(1, 6)
         self.hp = hp
         self.attack = attack
-        self.initiative = initiative
+        self.initiative = 2
         self.armour = 10
 
 def dice_roll(number_of_dices):
@@ -122,7 +122,6 @@ def encounter(player_character):
     while monster_alive == True and player_alive == True:
         if player_character.initiative >= new_monster.initiative:
             print("The player go first")
-            print("First loop player")
             player_action = input("""Selec your action:
             1- Attack
             2- Defend
@@ -132,47 +131,51 @@ def encounter(player_character):
                 player_attack(player_character, new_monster)
                 if new_monster.hp == 0:
                     monster_alive = False
+                    print("The goblin is dead!")
                     break
-                print("The goblin is dead!")
-            elif player_action == 2:
-                print("PLayer defend")
-                player_attack(player_character, new_monster)
-                if new_monster.hp == 0:
-                    monster_alive = False
-                    break
-            elif player_action == 3:
+            elif player_action == "2":
+                print("PLayer defend") 
+            elif player_action == "3":
                 print("player is healing up")
             else:
                 print("That is not action you can do!")
 
-
-
-
-
-
-
-            
-            monster_attack(new_monster, player_character)
-            if player_character.hp == 0:
-                player_alive = False
-                break
-            print("The human is dead!")
-        else:
-            print("The monster go first")
-            while monster_alive == True and player_alive == True:
+            if monster_alive == True:
+                print("The monster attack!")
                 monster_attack(new_monster, player_character)
                 if player_character.hp == 0:
                     player_alive = False
+                    print("The human is dead!")
                     break
-                print("The human is dead!")
-                player_attack(player_character, new_monster)
-                if new_monster.hp == 0:
-                    monster_alive = False
+                
+        else:
+            while monster_alive == True and player_alive == True:
+                print("The monster go first")
+                print("The monster attack!")
+                monster_attack(new_monster, player_character)
+                if player_character.hp == 0:
+                    player_alive = False
+                    print("The human is dead!")
                     break
-                print("The goblin is dead!")
-
+                
+                player_action = input("""Selec your action:
+                1- Attack
+                2- Defend
+                3- Heal
+                """)
+                if player_action == "1":
+                    player_attack(player_character, new_monster)
+                    if new_monster.hp == 0:
+                        monster_alive = False
+                        print("The goblin is dead!")
+                        break
+                elif player_action == "2":
+                    print("PLayer defend") 
+                elif player_action == "3":
+                    print("player is healing up")
+                else:
+                    print("That is not action you can do!")
 
 player_character = Player()
 
 main_function()
-
