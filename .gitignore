@@ -6,3 +6,6 @@ __pycache__/
 *.py[cod]
 node_modules/
 .github/
+.ipynb_checkpoints
+Untitled.ipynb
+.vscode/settings.json
