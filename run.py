@@ -1,7 +1,6 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 from pydoc import ModuleScanner
 import random
-import math
 from re import M
 
 
@@ -15,10 +14,12 @@ class Player:
         attack = random.randint(2, 3)
         # initiative = random.randint(1, 6)
         self.hp = hp
+        self.max_hp = hp
         self.attack = attack
         self.initiative = 1
         self.armour = 12
         self.name = ""
+
 
 class Monster:
     """
@@ -35,6 +36,7 @@ class Monster:
         self.initiative = 2
         self.armour = 10
 
+
 def dice_roll(number_of_dices):
     """
     Generic functions to resolve any other roll dices
@@ -46,6 +48,7 @@ def dice_roll(number_of_dices):
     dice_result = sum[results]
     return dice_result
 
+
 def attack_roll(number_of_dices):
     """
     This is used to generate the rolls for attacks.
@@ -56,6 +59,7 @@ def attack_roll(number_of_dices):
         results.append(roll)
         attack_roll = sum(results)
     return attack_roll
+
 
 def player_attack(player_raul, new_monster):
     """
@@ -69,6 +73,7 @@ def player_attack(player_raul, new_monster):
     else:
         print("The player attack failed")
 
+
 def monster_attack(new_monster, player_character):
     """
     Fuction used to calculate if an injuried is inflicted
@@ -80,6 +85,35 @@ def monster_attack(new_monster, player_character):
     else:
         print("The monster attack failed")
 
+
+def after_combat():
+    """
+    This fuction provides information about of the combat.
+    """
+    print("The combat is over what do you want to do:")
+    player_rest_action = input(
+        """ 
+    1- Heal up
+    2- Continue
+    """
+    )
+    if player_rest_action == "1":
+        player_rest(player_character)
+    elif player_rest_action == "2":
+        print("No time to stop")
+
+
+def player_rest(player_character):
+    """
+    Fucntion to calculate healing
+    """
+    if player_character.max_hp == player_character.hp:
+        print("You don't need to healyourself")
+    else:
+        player_character.hp = player_character.hp + 1
+        print("You healed 1 hop")
+
+
 def encounter(player_character):
     """
     This is used to represent the fight with a monster and advance to the next tower's level
@@ -89,9 +123,10 @@ def encounter(player_character):
     monster_alive = True
     player_alive = True
 
-    while monster_alive == True and player_alive == True:
-        if player_character.initiative >= new_monster.initiative:
-            print("The player go first")
+    if player_character.initiative >= new_monster.initiative:
+        print("The player go first")
+        while monster_alive == True and player_alive == True:
+        
             player_action = input(
                 """Selec your action:
             1- Attack
@@ -120,35 +155,36 @@ def encounter(player_character):
                     print("The human is dead!")
                     break
 
-        else:
-            while monster_alive == True and player_alive == True:
-                print("The monster go first")
-                print("The monster attack!")
-                monster_attack(new_monster, player_character)
-                if player_character.hp == 0:
-                    player_alive = False
-                    print("The human is dead!")
-                    break
+    else:
+        print("The monster go first")
+        while monster_alive == True and player_alive == True:
+            print("The monster attack!")
+            monster_attack(new_monster, player_character)
+            if player_character.hp == 0:
+                player_alive = False
+                print("The human is dead!")
+                break
 
-                player_action = input(
-                    """Selec your action:
-                1- Attack
-                2- Defend
-                3- Heal
-                """
-                )
-                if player_action == "1":
-                    player_attack(player_character, new_monster)
-                    if new_monster.hp == 0:
-                        monster_alive = False
-                        print("The goblin is dead!")
-                        break
-                elif player_action == "2":
-                    print("PLayer defend")
-                elif player_action == "3":
-                    print("player is healing up")
-                else:
-                    print("That is not action you can do!")
+            player_action = input(
+                """Selec your action:
+            1- Attack
+            2- Defend
+            3- Heal
+            """
+            )
+            if player_action == "1":
+                player_attack(player_character, new_monster)
+                if new_monster.hp == 0:
+                    monster_alive = False
+                    print("The goblin is dead!")
+                    break
+            elif player_action == "2":
+                print("PLayer defend")
+            elif player_action == "3":
+                print("player is healing up")
+            else:
+                print("That is not action you can do!")
+
 
 def main_function():
 
@@ -167,19 +203,18 @@ def main_function():
         else:
             print("I am afraid do not understsand that. Can you say it again?")
 
-    while tower_floor  <= 5:
-        
+    while tower_floor <= 5:
         print("After climbing the stairs you arrive to the first floor")
         encounter(player_character)
-        print(player_character.hp)
-        print("After defeating the moster you continue to the next level")
-        tower_floor = tower_floor + 1
-        encounter(player_character)
-        print(player_character.hp)
-        tower_floor = tower_floor + 1
+        if player_character.hp == 0:
+            print("You are DEAD game Over")
+            break
+        after_combat()
         print(f"Floor number: {tower_floor}")
-    
+        tower_floor = tower_floor + 1
+
     print("No more floors")
+
 
 player_character = Player()
 
