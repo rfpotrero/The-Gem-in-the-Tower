@@ -1,8 +1,6 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 from pydoc import ModuleScanner
 import random
-from re import M
-
 
 class Player:
     """
@@ -116,7 +114,6 @@ def final_fight():
     """
     type_of_attack = ("powerful_attack", "fast_attack", "defend")
 
-
     Dragon = final_boss()
     print("You are face again the final boss of the tower")
     print("The dragon prepares to attack")
@@ -138,24 +135,24 @@ def final_fight():
             monster_attack(new_monster, player_character)
             Dragon.armour = Dragon.armour + 2
             if player_character.hp == 0:
-                    player_alive = False
-                    print("The human is dead!")
-                    break
+                player_alive = False
+                print("The human is dead!")
+                break
         elif boss_attack == "fast_attack" and player_choice == "2":
             print("You shield raised in a perfect block")
             Dragon.attack = Dragon.attack - 1
             monster_attack(new_monster, player_character)
             if player_character.hp == 0:
-                    player_alive = False
-                    print("The human is dead!")
-                    break
+                player_alive = False
+                print("The human is dead!")
+                break
             Dragon.attack = Dragon.attack + 1
             player_attack(player_raul, new_monster)
             if Dragon.hp == 0:
                 boss_alive = False
                 print("The boss is dead!")
                 break
-        elif boss_attack == "defend"
+        elif boss_attack == "defend":
             Dragon.armour = Dragon.armour + 2
             Dragon.attack = Dragon.attack - 2
             print("The dragon defend himself")
@@ -166,19 +163,37 @@ def final_fight():
                 break
             monster_attack(new_monster, player_character)
             if player_character.hp == 0:
-                    player_alive = False
-                    print("The human is dead!")
-                    break
+                player_alive = False
+                print("The human is dead!")
+                break
             Dragon.armour = Dragon.armour - 2
             Dragon.attack = Dragon.attack + 2
 
         else:
-            if boss_attack == "Po"
-            
-            
-
-
-
+            if boss_attack == "powerful_attack":
+                Dragon.attack = Dragon.attack + 2
+                player_attack(player_raul, new_monster)
+                if Dragon.hp == 0:
+                    boss_alive = False
+                    print("The boss is dead!")
+                    break
+                monster_attack(new_monster, player_character)
+                if player_character.hp == 0:
+                    player_alive = False
+                    print("The human is dead!")
+                    break
+                Dragon.attack = Dragon.attack - 2
+            if boss_attack == "fast_attack":
+                monster_attack(new_monster, player_character)
+                if player_character.hp == 0:
+                    player_alive = False
+                    print("The human is dead!")
+                    break
+                player_attack(player_raul, new_monster)
+                if Dragon.hp == 0:
+                    boss_alive = False
+                    print("The boss is dead!")
+                    break
 
 def player_rest(player_character):
     """
