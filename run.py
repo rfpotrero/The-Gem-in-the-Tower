@@ -20,7 +20,6 @@ class Player:
         self.armour = 12
         self.name = ""
 
-
 class Monster:
     """
     This create an instance of monster
@@ -36,6 +35,19 @@ class Monster:
         self.initiative = 2
         self.armour = 10
 
+class final_boss:
+    """
+    This generate the final boss
+    """
+    def __init__(self):
+
+        hp = 1
+        attack = random.randint(2, 3)
+        # initiative = random.randint(1, 6)
+        self.hp = hp
+        self.attack = attack
+        self.initiative = 2
+        self.armour = 10
 
 def dice_roll(number_of_dices):
     """
@@ -48,7 +60,6 @@ def dice_roll(number_of_dices):
     dice_result = sum[results]
     return dice_result
 
-
 def attack_roll(number_of_dices):
     """
     This is used to generate the rolls for attacks.
@@ -59,7 +70,6 @@ def attack_roll(number_of_dices):
         results.append(roll)
         attack_roll = sum(results)
     return attack_roll
-
 
 def player_attack(player_raul, new_monster):
     """
@@ -73,7 +83,6 @@ def player_attack(player_raul, new_monster):
     else:
         print("The player attack failed")
 
-
 def monster_attack(new_monster, player_character):
     """
     Fuction used to calculate if an injuried is inflicted
@@ -84,7 +93,6 @@ def monster_attack(new_monster, player_character):
         player_character.hp = player_character.hp - 1
     else:
         print("The monster attack failed")
-
 
 def after_combat():
     """
@@ -102,6 +110,75 @@ def after_combat():
     elif player_rest_action == "2":
         print("No time to stop")
 
+def final_fight():
+    """
+    This will play the final boss fight
+    """
+    type_of_attack = ("powerful_attack", "fast_attack", "defend")
+
+
+    Dragon = final_boss()
+    print("You are face again the final boss of the tower")
+    print("The dragon prepares to attack")
+    while boss_alive == True and player_alive == True:
+        boss_attack =  type_of_attack[random.randint(0, 2)]
+        print(f"The dragon is preparing a {boss_attack} you what are you going to do!")
+        player_choice =input(""" 1- Attack
+        2- Defend 
+        3- heal
+        """)
+        if boss_attack == "powerful_attack" and player_choice == "1":
+            Dragon.armour = Dragon.armour  - 2
+            print("You move faster at attack the dragon while preparing the attack")
+            player_attack(player_raul, new_monster)
+            if Dragon.hp == 0:
+                boss_alive = False
+                print("The boss is dead!")
+                break
+            monster_attack(new_monster, player_character)
+            Dragon.armour = Dragon.armour + 2
+            if player_character.hp == 0:
+                    player_alive = False
+                    print("The human is dead!")
+                    break
+        elif boss_attack == "fast_attack" and player_choice == "2":
+            print("You shield raised in a perfect block")
+            Dragon.attack = Dragon.attack - 1
+            monster_attack(new_monster, player_character)
+            if player_character.hp == 0:
+                    player_alive = False
+                    print("The human is dead!")
+                    break
+            Dragon.attack = Dragon.attack + 1
+            player_attack(player_raul, new_monster)
+            if Dragon.hp == 0:
+                boss_alive = False
+                print("The boss is dead!")
+                break
+        elif boss_attack == "defend"
+            Dragon.armour = Dragon.armour + 2
+            Dragon.attack = Dragon.attack - 2
+            print("The dragon defend himself")
+            player_attack(player_raul, new_monster)
+            if Dragon.hp == 0:
+                boss_alive = False
+                print("The boss is dead!")
+                break
+            monster_attack(new_monster, player_character)
+            if player_character.hp == 0:
+                    player_alive = False
+                    print("The human is dead!")
+                    break
+            Dragon.armour = Dragon.armour - 2
+            Dragon.attack = Dragon.attack + 2
+
+        else:
+            if boss_attack == "Po"
+            
+            
+
+
+
 
 def player_rest(player_character):
     """
@@ -112,7 +189,6 @@ def player_rest(player_character):
     else:
         player_character.hp = player_character.hp + 1
         print("You healed 1 hop")
-
 
 def encounter(player_character):
     """
@@ -184,7 +260,6 @@ def encounter(player_character):
                 print("player is healing up")
             else:
                 print("That is not action you can do!")
-
 
 def main_function():
 
