@@ -1,6 +1,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
-from pydoc import ModuleScanner
 import random
+import time
+from functions import *
 
 class Player:
     """
@@ -33,7 +34,7 @@ class Monster:
         self.initiative = 2
         self.armour = 10
 
-class final_boss:
+class FinalBoss:
     """
     This generate the final boss
     """
@@ -69,6 +70,17 @@ def attack_roll(number_of_dices):
         attack_roll = sum(results)
     return attack_roll
 
+def chance_of_encounter(even_outcome, sample_size, odds_chance):
+    """
+    This will calculate the chance of encounter while
+    the player search_floor or rest
+    Credits to Daniel Poston for the main code 
+    https://www.datacamp.com/tutorial/statistics-python-tutorial-probability-1
+    """
+    probability = (even_outcome / sample_size) * 100
+    if probability  >= odds_chance:
+        print("Awesome")
+
 def player_attack(player_raul, new_monster):
     """
     Fuction used to calculate if an injuried is inflicted
@@ -99,20 +111,23 @@ def after_combat():
     print("The combat is over what do you want to do:")
     player_rest_action = input(
         """ 
-    1- Heal up
-    2- Continue
+    1- Search the Floor
+    2- Stop and Rest
     """
     )
     if player_rest_action == "1":
-        player_rest(player_character)
+        print("Player search")
     elif player_rest_action == "2":
-        print("No time to stop")
+        player_rest(player_character)
 
 def final_fight():
     """
     This will play the final boss fight
     """
     type_of_attack = ("powerful_attack", "fast_attack", "defend")
+
+    boss_alive = True
+    player_alive = True
 
     Dragon = final_boss()
     print("You are face again the final boss of the tower")
@@ -281,7 +296,6 @@ def main_function():
     """
     Main Game function
     """
-    tower_floor = 0
     player_character = Player()
     while True:
         player_character.name = input(
@@ -293,8 +307,8 @@ def main_function():
         else:
             print("I am afraid do not understsand that. Can you say it again?")
 
+    intro()
     while tower_floor <= 5:
-        print("After climbing the stairs you arrive to the first floor")
         encounter(player_character)
         if player_character.hp == 0:
             print("You are DEAD game Over")
@@ -303,8 +317,9 @@ def main_function():
         print(f"Floor number: {tower_floor}")
         tower_floor = tower_floor + 1
 
-    print("No more floors")
+    print("Final Battle!")
 
+    final_fight()
 
 player_character = Player()
 
