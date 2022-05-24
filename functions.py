@@ -46,6 +46,3 @@ def thrid_floor():
     This display the third floor description.
     """
     pass
-    
-
-    They were not looking into an open street or court as one would have expected. The opened gate, or door, gave directly into a long,
