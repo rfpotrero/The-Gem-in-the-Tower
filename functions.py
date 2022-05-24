@@ -16,13 +16,14 @@ def intro():
     """ 
     Displays the game game intro
     """
-    P_S("The rest of your crew are missing or dead. The few that survived the")
-    P_S("strom most likely did not make it through the jungle.")
+    P_S("The rest of your crew are missing or dead.")
+    P_S("The few that survived the strom most likely did not survived the jungle")
     P_S("Cutting through the thick wall of green is hard and takes time")
     P_S("by the time you leave the behid the jungle your arms feel like")
-    P_S("if you have spend the entire day in battle and your whole body")
-    P_S("is covered in sweat. The fatigue fell like chain of iron on your")
-    P_S("limbs and so you decided to rest before the night close in")
+    P_S("if you have spend the entire day in battle.")
+    P_S("The fatigue fell like chains of iron over your limbs and so you")
+    P_S("decideto rest before the night close in")
+    P_S("")
 
 def first_floor():
     """
