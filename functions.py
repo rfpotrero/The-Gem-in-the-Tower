@@ -23,9 +23,18 @@ def intro():
     P_S("Now you stand in the front of the tower")
 
 
-def room():
-    return("""
-    This display the room description.
-    """)
-    P_S("")
+def first_floor():
+    """
+    This display the first floor description.
+    """
+    P_S("Without any delay you start to make your way up")
+    P_S("The air smell damp and there is the lingering sweet")
+    P_S("Aroma of rotting vegetation")
+    
+
+def second_floor():
+    pass
+
+def thrid_floor():
+    pass
     
