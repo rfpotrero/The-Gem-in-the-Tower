@@ -248,14 +248,13 @@ def encounter(player_character):
 
     if player_character.initiative >= new_monster.initiative:
         print("The player go first")
-        while monster_alive == True and player_alive == True:
-        
+        while monster_alive is True and player_alive is True:
             player_action = input(
                 """Selec your action:
-            1- Attack
-            2- Defend
-            3- Heal
-            """
+                1- Attack
+                2- Defend
+                3- Heal
+                """
             )
             if player_action == "1":
                 player_attack(player_character, new_monster)
@@ -270,30 +269,28 @@ def encounter(player_character):
             else:
                 print("That is not action you can do!")
 
-            if monster_alive == True:
+            if monster_alive is True:
                 print("The monster attack!")
                 monster_attack(new_monster, player_character)
                 if player_character.hp == 0:
                     player_alive = False
-                    print("The human is dead!")
-                    break
+                    game_over()
 
     else:
         print("The monster go first")
-        while monster_alive == True and player_alive == True:
+        while monster_alive is True and player_alive is True:
             print("The monster attack!")
             monster_attack(new_monster, player_character)
             if player_character.hp == 0:
                 player_alive = False
-                print("The human is dead!")
-                break
+                game_over()
 
             player_action = input(
                 """Selec your action:
-            1- Attack
-            2- Defend
-            3- Heal
-            """
+                1- Attack
+                2- Defend
+                3- Heal
+                """
             )
             if player_action == "1":
                 player_attack(player_character, new_monster)
