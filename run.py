@@ -18,6 +18,15 @@ class Player:
         self.initiative = 1
         self.armour = 12
         self.name = ""
+    def healing_up(self):
+        """
+        Method to calculate healing
+        """
+        if self.max_hp == self.hp:
+            print("You don't need to healyourself")
+        else:
+            player_character.hp = player_character.hp + 2
+            print("You healed 2 hp")
 
 class Monster:
     """
@@ -227,16 +236,6 @@ def final_fight():
                     boss_alive = False
                     print("The boss is dead!")
                     break
-
-def player_rest(player_character):
-    """
-    Fucntion to calculate healing
-    """
-    if player_character.max_hp == player_character.hp:
-        print("You don't need to healyourself")
-    else:
-        player_character.hp = player_character.hp + 1
-        print("You healed 1 hop")
 
 def encounter(player_character):
     """
