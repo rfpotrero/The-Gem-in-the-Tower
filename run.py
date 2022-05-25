@@ -120,6 +120,24 @@ def after_combat():
     elif player_rest_action == "2":
         player_rest(player_character)
 
+def game_over():
+    """
+    This function will end the current game when a player health_points 
+    reach zero and will ask the player if they want to play again.
+    """
+    P_S("The game is over")
+    P_S("Do you have to play again?")
+    game_over_option = input("""
+    1- Play again
+    2- Quit
+    """)
+    if game_over_option == "1":
+        main_function()
+    elif game_over_option == "2":
+        exit()
+    else:
+        print("Please select a valid option")
+
 def final_fight():
     """
     This will play the final boss fight
@@ -296,6 +314,10 @@ def main_function():
     """
     Main Game function
     """
+    intro()
+    first_floor()  
+
+
     player_character = Player()
     while True:
         player_character.name = input(
@@ -307,17 +329,6 @@ def main_function():
         else:
             print("I am afraid do not understsand that. Can you say it again?")
 
-    intro()
-    while tower_floor <= 5:
-        encounter(player_character)
-        if player_character.hp == 0:
-            print("You are DEAD game Over")
-            break
-        after_combat()
-        print(f"Floor number: {tower_floor}")
-        tower_floor = tower_floor + 1
-
-    print("Final Battle!")
 
     final_fight()
 
