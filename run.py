@@ -113,7 +113,7 @@ def monster_attack(new_monster, player_character):
     else:
         print("The monster attack failed")
 
-def after_combat():
+def after_combat(player_character):
     """
     This fuction provides information about of the combat.
     """
@@ -127,7 +127,7 @@ def after_combat():
     if player_rest_action == "1":
         print("Player search")
     elif player_rest_action == "2":
-        player_rest(player_character)
+        player_character.healing_up()
 
 def game_over():
     """
@@ -147,7 +147,7 @@ def game_over():
     else:
         print("Please select a valid option")
 
-def final_fight():
+def final_fight(player_character):
     """
     This will play the final boss fight
     """
@@ -159,7 +159,7 @@ def final_fight():
     dragon = FinalBoss()
     print("You are face again the final boss of the tower")
     print("The dragon prepares to attack")
-    while boss_alive == True and player_alive == True:
+    while boss_alive is True and player_alive is True:
         boss_attack =  type_of_attack[random.randint(0, 2)]
         print(f"The dragon is preparing a {boss_attack} you what are you going to do!")
         player_choice =input(""" 1- Attack
@@ -169,12 +169,12 @@ def final_fight():
         if boss_attack == "powerful_attack" and player_choice == "1":
             dragon.armour = dragon.armour  - 2
             print("You move faster at attack the dragon while preparing the attack")
-            player_attack(player_character, new_monster)
+            player_attack(player_character, dragon)
             if dragon.hp == 0:
                 boss_alive = False
                 print("The boss is dead!")
                 break
-            monster_attack(new_monster, player_character)
+            monster_attack(dragon, player_character)
             dragon.armour = dragon.armour + 2
             if player_character.hp == 0:
                 player_alive = False
@@ -183,13 +183,13 @@ def final_fight():
         elif boss_attack == "fast_attack" and player_choice == "2":
             print("You shield raised in a perfect block")
             dragon.attack = dragon.attack - 1
-            monster_attack(new_monster, player_character)
+            monster_attack(dragon, player_character)
             if player_character.hp == 0:
                 player_alive = False
                 print("The human is dead!")
                 break
             dragon.attack = dragon.attack + 1
-            player_attack(player_raul, new_monster)
+            player_attack(player_character, dragon)
             if dragon.hp == 0:
                 boss_alive = False
                 print("The boss is dead!")
@@ -198,12 +198,12 @@ def final_fight():
             dragon.armour = dragon.armour + 2
             dragon.attack = dragon.attack - 2
             print("The dragon defend himself")
-            player_attack(player_raul, new_monster)
+            player_attack(player_character, dragon)
             if dragon.hp == 0:
                 boss_alive = False
                 print("The boss is dead!")
                 break
-            monster_attack(new_monster, player_character)
+            monster_attack(dragon, player_character)
             if player_character.hp == 0:
                 player_alive = False
                 print("The human is dead!")
@@ -214,24 +214,24 @@ def final_fight():
         else:
             if boss_attack == "powerful_attack":
                 dragon.attack = dragon.attack + 2
-                player_attack(player_raul, new_monster)
+                player_attack(player_character, dragon)
                 if dragon.hp == 0:
                     boss_alive = False
                     print("The boss is dead!")
                     break
-                monster_attack(new_monster, player_character)
+                monster_attack(dragon, player_character)
                 if player_character.hp == 0:
                     player_alive = False
                     print("The human is dead!")
                     break
                 dragon.attack = dragon.attack - 2
             if boss_attack == "fast_attack":
-                monster_attack(new_monster, player_character)
+                monster_attack(dragon, player_character)
                 if player_character.hp == 0:
                     player_alive = False
                     print("The human is dead!")
                     break
-                player_attack(player_raul, new_monster)
+                player_attack(player_character, dragon)
                 if dragon.hp == 0:
                     boss_alive = False
                     print("The boss is dead!")
@@ -325,7 +325,7 @@ def main_function():
     intro()
     first_floor()
     second_floor()
-    final_fight()
+    final_fight(player_character)
 
 
 main_function()
