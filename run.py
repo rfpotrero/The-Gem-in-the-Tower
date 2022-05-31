@@ -76,14 +76,14 @@ def attack_roll(number_of_dices):
     for dice in range(number_of_dices):
         roll = random.randint(1, 6)
         results.append(roll)
-        attack_roll = sum(results)
-    return attack_roll
+        attack_roll_dice = sum(results)
+    return attack_roll_dice
 
 def chance_of_encounter(even_outcome, sample_size, odds_chance):
     """
     This will calculate the chance of encounter while
     the player search_floor or rest
-    Credits to Daniel Poston for the main code 
+    Credits to Daniel Poston for the main code
     https://www.datacamp.com/tutorial/statistics-python-tutorial-probability-1
     """
     probability = (even_outcome / sample_size) * 100
@@ -106,8 +106,8 @@ def monster_attack(new_monster, player_character):
     """
     Fuction used to calculate if an injuried is inflicted
     """
-    monster_attack = attack_roll(new_monster.attack)
-    if monster_attack >= player_character.armour:
+    monster_attack_roll = attack_roll(new_monster.attack)
+    if monster_attack_roll >= player_character.armour:
         print("The monster hit the player")
         player_character.hp = player_character.hp - 1
     else:
@@ -119,7 +119,7 @@ def after_combat(player_character):
     """
     print("The combat is over what do you want to do:")
     player_rest_action = input(
-        """ 
+        """
     1- Search the Floor
     2- Stop and Rest
     """
@@ -131,7 +131,7 @@ def after_combat(player_character):
 
 def game_over():
     """
-    This function will end the current game when a player health_points 
+    This function will end the current game when a player health_points
     reach zero and will ask the player if they want to play again.
     """
     P_S("The game is over")
@@ -324,6 +324,7 @@ def main_function():
 
     intro()
     first_floor()
+    encounter(player_character)
     second_floor()
     final_fight(player_character)
 
