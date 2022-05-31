@@ -95,8 +95,8 @@ def player_attack(player_character, new_monster):
     Fuction used to calculate if an injuried is inflicted
     """
     print("Player Attack!")
-    player_attack = attack_roll(player_character.attack)
-    if player_attack >= new_monster.armour:
+    player_attack_roll = attack_roll(player_character.attack)
+    if player_attack_roll >= new_monster.armour:
         print("The player hit the monster")
         new_monster.hp = new_monster.hp - 1
     else:
