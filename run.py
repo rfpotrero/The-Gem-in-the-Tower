@@ -1,7 +1,7 @@
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
 import random
 import time
 from functions import *
+from colored import fg, bg, attr
 
 class Player:
     """
@@ -141,7 +141,7 @@ def game_over():
     2- Quit
     """)
     if game_over_option == "1":
-        main_function()
+        main()
     elif game_over_option == "2":
         exit()
     else:
@@ -305,12 +305,32 @@ def encounter(player_character):
             else:
                 print("That is not action you can do!")
 
-def main_function():
+def main():
 
     """
     Main Game function
     """
     player_character = Player()
+    print(
+    """
+_________          _______    _______  _______  _______   _________ _       
+\__   __/|\     /|(  ____ \  (  ____ \(  ____ \(       )  \__   __/( (    /|
+   ) (   | )   ( || (    \/  | (    \/| (    \/| () () |     ) (   |  \  ( |
+   | |   | (___) || (__      | |      | (__    | || || |     | |   |   \ | |
+   | |   |  ___  ||  __)     | | ____ |  __)   | |(_)| |     | |   | (\ \) |
+   | |   | (   ) || (        | | \_  )| (      | |   | |     | |   | | \   |
+   | |   | )   ( || (____/\  | (___) || (____/\| )   ( |  ___) (___| )  \  |
+   )_(   |/     \|(_______/  (_______)(_______/|/     \|  \_______/|/    )_)
+                                                                            
+_________          _______   _________ _______           _______  _______ 
+\__   __/|\     /|(  ____ \  \__   __/(  ___  )|\     /|(  ____ \(  ____ )
+   ) (   | )   ( || (    \/     ) (   | (   ) || )   ( || (    \/| (    )|
+   | |   | (___) || (__         | |   | |   | || | _ | || (__    | (____)|
+   | |   |  ___  ||  __)        | |   | |   | || |( )| ||  __)   |     __)
+   | |   | (   ) || (           | |   | |   | || || || || (      | (\ (   
+   | |   | )   ( || (____/\     | |   | (___) || () () || (____/\| ) \ \__
+   )_(   |/     \|(_______/     )_(   (_______)(_______)(_______/|/   \__/    
+    """)
 
     while True:
         player_character.name = input(
@@ -329,4 +349,5 @@ def main_function():
     final_fight(player_character)
 
 
-main_function()
+if __name__ == '__main__':
+    main()
