@@ -88,7 +88,7 @@ def chance_of_encounter(even_outcome, sample_size, odds_chance):
     """
     probability = (even_outcome / sample_size) * 100
     if probability  >= odds_chance:
-        print("Awesome")
+        return True
 
 def player_attack(player_character, new_monster):
     """
@@ -305,6 +305,22 @@ def encounter(player_character):
             else:
                 print("That is not action you can do!")
 
+def first_floor_action(player_character):
+    P_S("What are you doing next?")
+    P_S("1- Search and Prepare")
+    P_S("2- Continue climbin the tower")
+    first_floor_choice = input("Choose careful!")
+    if first_floor_choice == "1":
+        if chance_of_encounter(50,100,50) is True:
+            encounter(player_character)
+        else:
+            player_character.attack = player_character.attack + 2
+    elif first_floor_choice == "2":
+        if chance_of_encounter(50,100,50) is True:
+            encounter(player_character)
+    else:
+        print("You need to select a valid action")
+
 def main():
 
     """
@@ -344,6 +360,7 @@ _________          _______   _________ _______           _______  _______
 
     intro()
     first_floor()
+    first_floor_action(player_character)
     encounter(player_character)
     second_floor()
     final_fight(player_character)
