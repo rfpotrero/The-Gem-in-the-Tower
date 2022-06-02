@@ -79,14 +79,15 @@ def attack_roll(number_of_dices):
         attack_roll_dice = sum(results)
     return attack_roll_dice
 
-def chance_of_encounter(even_outcome, sample_size, odds_chance):
+def chance_of_encounter(odds_chance):
     """
     This will calculate the chance of encounter while
     the player search_floor or rest
     Credits to Daniel Poston for the main code
     https://www.datacamp.com/tutorial/statistics-python-tutorial-probability-1
     """
-    probability = (even_outcome / sample_size) * 100
+    event_outcome = random.randint(0,10)
+    probability = event_outcome * 10
     if probability  >= odds_chance:
         return True
 
@@ -117,18 +118,27 @@ def after_combat(player_character):
     """
     This fuction provides information about of the combat.
     """
-    P_S("What are you doing next?")
-    P_S("1- Search and Prepare")
-    P_S("2- Healing ")
-    after_combat_choice = input("Choose careful!")
+    P_S("The fight is over while your heartbeat still pound hard in your chest")
+    P_S("you stop for a moment to consider your next move.")
+    P_S("1- Continue moving ahead")
+    P_S("2- Stop and healing")
+    after_combat_choice = input("What you would do?")
     if after_combat_choice == "1":
-        if chance_of_encounter(50,100,50) is True:
+        P_S("Not wasting any time you decided to move forward")
+        P_S("The path to the next floors seems clear")
+    elif after_combat_choice == "2":
+        P_S("The adrenaline is fading away and the injuries from the last")
+        P_S("The last fight are starting to hurt. You decided to stop before")
+        P_S("they get worse.")
+        P_S("While applying the bandages a sudden sound catch your attention..")
+        if chance_of_encounter(100) is True:
+            P_S("A see you from the distance and start to run towards you!")
+            P_S("Get ready!")
             encounter(player_character)
         else:
-            player_character.attack = player_character.attack + 2
-    elif after_combat_choice == "2":
-        if chance_of_encounter(50,100,50) is True:
-            encounter(player_character)
+            P_S("You hold your breath for a second but nothin happen")
+            P_S("with the wounds bandage you resume your exploration")
+            player_character.healing_up()
     else:
         print("You need to select a valid action")
 
@@ -313,17 +323,27 @@ def first_floor_action(player_character):
     This fuctions will appear only in the first floor for the next floors
     the actions are different.
     """
-    P_S("What are you doing next?")
+    P_S("Dust cover everything in the halls, market stall appear abandod")
+    P_S("As if they all left in a rush")
+    P_S("The halls might have something of value but be careful")
     P_S("1- Search and Prepare")
     P_S("2- Continue climbin the tower")
     first_floor_choice = input("Choose careful!")
     if first_floor_choice == "1":
-        if chance_of_encounter(50,100,50) is True:
+        if chance_of_encounter(50) is True:
+            P_S("While searching for anything of value the sound")
+            P_S("a sudden cry pierced the silence and you turn just in")
+            P_S("to see a strange creature charging!")
+            P_S("Get ready!")
             encounter(player_character)
         else:
+            P_S("You were ready to give up and complaint about wasting time")
+            P_S("While a bright blade caught your eye a quick cleaning")
+            P_S("Reveals an extraordinary weapon that will surely help")
+            P_S("on what you will facing ahead.")
             player_character.attack = player_character.attack + 2
     elif first_floor_choice == "2":
-        if chance_of_encounter(50,100,50) is True:
+        if chance_of_encounter(50) is True:
             encounter(player_character)
     else:
         print("You need to select a valid action")
