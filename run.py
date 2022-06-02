@@ -117,17 +117,20 @@ def after_combat(player_character):
     """
     This fuction provides information about of the combat.
     """
-    print("The combat is over what do you want to do:")
-    player_rest_action = input(
-        """
-    1- Search the Floor
-    2- Stop and Rest
-    """
-    )
-    if player_rest_action == "1":
-        print("Player search")
-    elif player_rest_action == "2":
-        player_character.healing_up()
+    P_S("What are you doing next?")
+    P_S("1- Search and Prepare")
+    P_S("2- Healing ")
+    after_combat_choice = input("Choose careful!")
+    if after_combat_choice == "1":
+        if chance_of_encounter(50,100,50) is True:
+            encounter(player_character)
+        else:
+            player_character.attack = player_character.attack + 2
+    elif after_combat_choice == "2":
+        if chance_of_encounter(50,100,50) is True:
+            encounter(player_character)
+    else:
+        print("You need to select a valid action")
 
 def game_over():
     """
@@ -306,6 +309,10 @@ def encounter(player_character):
                 print("That is not action you can do!")
 
 def first_floor_action(player_character):
+    """
+    This fuctions will appear only in the first floor for the next floors
+    the actions are different.
+    """
     P_S("What are you doing next?")
     P_S("1- Search and Prepare")
     P_S("2- Continue climbin the tower")
@@ -361,8 +368,10 @@ _________          _______   _________ _______           _______  _______
     intro()
     first_floor()
     first_floor_action(player_character)
-    encounter(player_character)
     second_floor()
+    after_combat(player_character)
+    thrid_floor()
+    after_combat(player_character)
     final_fight(player_character)
 
 
