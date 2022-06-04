@@ -1,5 +1,6 @@
 import random
 import time
+from tokenize import PseudoExtras
 from functions import *
 from colored import fg, bg, attr
 
@@ -328,9 +329,9 @@ def first_floor_action(player_character):
     P_S("The halls might have something of value but be careful")
     P_S("1- Search and Prepare")
     P_S("2- Continue climbin the tower")
-    first_floor_choice = input("Choose careful!")
+    first_floor_choice = input("What you want to do?")
     if first_floor_choice == "1":
-        if chance_of_encounter(50) is True:
+        if chance_of_encounter(80) is True:
             P_S("While searching for anything of value the sound")
             P_S("a sudden cry pierced the silence and you turn just in")
             P_S("to see a strange creature charging!")
@@ -344,10 +345,56 @@ def first_floor_action(player_character):
             player_character.attack = player_character.attack + 2
     elif first_floor_choice == "2":
         if chance_of_encounter(50) is True:
+            P_S("Moving forward you spot what looks like the stairs to")
+            P_S("The next level. You are almost at the start of the stairs")
+            P_S("When the clash and metal and stone draw you attention")
+            P_S("A lonely creature is approaching...")
+            P_S("Get ready!")
             encounter(player_character)
+        else:
+            P_S("Moving forward you spot what looks like the stairs to")
+            P_S("The next level. You are almost at the start of the stairs")
+            P_S("Climbing the startirs is easy, the worn stone under your feet")
+            P_S("Is smooth. While walking you wondered what happened here..")
     else:
         print("You need to select a valid action")
 
+def second_floor_action(player_character):
+    """
+    Second floor actions description and result.
+    """
+    P_S("Wandering through the dead city you spot the familiar sing of a smith")
+    P_S("It is massive building the big forges now dark and dead but")
+    P_S("you can easily imagine how busy this building and the sound of hammering")
+    P_S("There might be some items left behind inside the massive building")
+    P_S("it will make you take a detour and add a few hours...would it be worhty?")
+    P_S("What you would?")
+    P_S("")
+    second_floor_choice = input("""
+    1- Enter the forge
+    2- Whatever is there is not worthy
+    """)
+    if second_floor_choice == "1":
+        if chance_of_encounter(80) is True:
+            P_S("The makeshift torch hold the darkness at bay")
+            P_S("hammers and anvil are starting to rust some still have the pieces")
+            P_S("of steel over there as if waiting to be completed...")
+            P_S("Suddenly your hair stand up on the back of your neck a pair")
+            P_S("of eyes glow in the darkness getting closer...")
+            P_S("Get Ready!")
+            encounter(player_character)
+        else:
+            P_S("The makeshift torch hold the darkness at bay")
+            P_S("hammers and anvil are starting to rust some still have the pieces")
+            P_S("of steel over there as if waiting to be completed...")
+            P_S("Suddenly your hair stand up on the back of your neck a pair")
+            P_S("You turn with your weapon ready....")
+            P_S("a quite laugh escape your lips. What looked like enemies is a row")
+            P_S("of armour stands..getting closer this marvelous craft still is usable")
+            P_S("You spot a shield the surface smooth and dusty but the straps are sturdy")
+            P_S("and the metal strong. You take it with you, any help is welcome here")
+            player_character.armour = player_character.armour + 2
+            
 def main():
 
     """
@@ -389,9 +436,8 @@ _________          _______   _________ _______           _______  _______
     first_floor()
     first_floor_action(player_character)
     second_floor()
-    after_combat(player_character)
+    second_floor_action(player_character)
     thrid_floor()
-    after_combat(player_character)
     final_fight(player_character)
 
 
