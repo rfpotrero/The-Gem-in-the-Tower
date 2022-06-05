@@ -394,7 +394,47 @@ def second_floor_action(player_character):
             P_S("You spot a shield the surface smooth and dusty but the straps are sturdy")
             P_S("and the metal strong. You take it with you, any help is welcome here")
             player_character.armour = player_character.armour + 2
-            
+    elif second_floor_choice == "2":
+        P_S("You left the building behind an continue to move towards the main street")
+        P_S("a wide avenue that in better time for sure would have been a breath taking sight")
+        P_S("the street appears to converge in what looks like the access to upwards...")
+
+def third_floor_action(player_character):
+    """
+    Third floor description
+    """
+    P_S("The glittering of jewels makes you stop in your heels, the riches in this")
+    P_S("will be enough to live a life of comfort but that is not what you are here for")
+    P_S("What do you want to do?")
+    P_S("""
+        1- Enter and search
+        2- That is not what I am here for!
+    """)
+    third_floor_choice = input("")
+    if third_floor_choice == "1":
+        if chance_of_encounter(80) is True:
+            P_S("Your eyes can't believe the amount of diamonds, ruby and other")
+            P_S("many precious stones in the same room. You are roaming day dreaming")
+            P_S("about pack your bags with as many jewels and have a good life")
+            P_S("your hand is almost reaching to an exquisite crown when")
+            P_S("a gurgling noise raise from the end of the shop followed by a")
+            P_S("create stumbling towards you")
+            P_S("Get ready!")
+            encounter(player_attack)
+        else:
+            P_S("Your eyes can't believe the amount of diamonds, ruby and other")
+            P_S("many precious stones in the same room. You are roaming day dreaming")
+            P_S("about pack your bags with as many jewels and have a good life.")
+            P_S("Wandering the room you endup in front a display with a ring in the center")
+            P_S("you can swear that the ring glows but is hard to tell you reach for")
+            P_S("the ring. It feels warm and comforting in your hand. Suddenly the")
+            P_S("the old and new injuries seems to hurt less..")
+            player_character.hp = player_character.hp + 1
+    else:
+        P_S("You are no here for this! The final prize will make looks this like a cheap")
+        P_S("glass and tin copy. Steeling yourself you push forward to the stair")
+        P_S("leaving behind richeness beyong your wildest dreams")
+
 def main():
 
     """
