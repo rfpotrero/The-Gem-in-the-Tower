@@ -107,9 +107,11 @@ def player_attack(player_character, new_monster):
     player_attack_roll = attack_roll(player_character.attack)
     if player_attack_roll >= new_monster.armour:
         print("The player hit the monster")
+        print(player_attack_roll)
         new_monster.hp = new_monster.hp - 1
     else:
         print("The player attack failed")
+        print(player_attack_roll)
 
 def monster_attack(new_monster, player_character):
     """
@@ -155,6 +157,7 @@ def game_over():
     This function will end the current game when a player health_points
     reach zero and will ask the player if they want to play again.
     """
+    player_death()
     P_S("The game is over")
     P_S("Do you have to play again?")
     game_over_option = input("""
@@ -172,7 +175,7 @@ def final_fight(player_character):
     """
     This will play the final boss fight
     """
-    type_of_attack = ("powerful_attack", "fast_attack", "defend")
+    type_of_attack = ("powerful attack", "fast attack", "defend")
 
     boss_alive = True
     player_alive = True
@@ -183,17 +186,18 @@ def final_fight(player_character):
     while boss_alive is True and player_alive is True:
         boss_attack =  type_of_attack[random.randint(0, 2)]
         print(f"The dragon is preparing a {boss_attack} you what are you going to do!")
-        player_choice =input(""" 1- Attack
+        player_choice =input("""
+        1- Attack
         2- Defend 
         3- heal
         """)
-        if boss_attack == "powerful_attack" and player_choice == "1":
+        if boss_attack == "powerful attack" and player_choice == "1":
             dragon.armour = dragon.armour  - 2
-            print("You move faster at attack the dragon while preparing the attack")
+            print("You move faster and attack the dragon while preparing the attack")
             player_attack(player_character, dragon)
             if dragon.hp == 0:
                 boss_alive = False
-                print("The boss is dead!")
+                player_final_fight_victory()
                 break
             monster_attack(dragon, player_character)
             dragon.armour = dragon.armour + 2
@@ -201,7 +205,7 @@ def final_fight(player_character):
                 player_alive = False
                 print("The human is dead!")
                 break
-        elif boss_attack == "fast_attack" and player_choice == "2":
+        elif boss_attack == "fast attack" and player_choice == "2":
             print("You shield raised in a perfect block")
             dragon.attack = dragon.attack - 1
             monster_attack(dragon, player_character)
@@ -213,7 +217,7 @@ def final_fight(player_character):
             player_attack(player_character, dragon)
             if dragon.hp == 0:
                 boss_alive = False
-                print("The boss is dead!")
+                player_final_fight_victory()
                 break
         elif boss_attack == "defend":
             dragon.armour = dragon.armour + 2
@@ -222,7 +226,7 @@ def final_fight(player_character):
             player_attack(player_character, dragon)
             if dragon.hp == 0:
                 boss_alive = False
-                print("The boss is dead!")
+                player_final_fight_victory()
                 break
             monster_attack(dragon, player_character)
             if player_character.hp == 0:
@@ -238,7 +242,7 @@ def final_fight(player_character):
                 player_attack(player_character, dragon)
                 if dragon.hp == 0:
                     boss_alive = False
-                    print("The boss is dead!")
+                    player_final_fight_victory()
                     break
                 monster_attack(dragon, player_character)
                 if player_character.hp == 0:
@@ -255,7 +259,7 @@ def final_fight(player_character):
                 player_attack(player_character, dragon)
                 if dragon.hp == 0:
                     boss_alive = False
-                    print("The boss is dead!")
+                    player_final_fight_victory()
                     break
 
 def encounter(player_character):
@@ -263,12 +267,11 @@ def encounter(player_character):
     This is used to represent the fight with a monster and advance to the next tower's level
     """
     new_monster = Monster()
-    print("Fight Starts")
     monster_alive = True
     player_alive = True
 
     if player_character.initiative >= new_monster.initiative:
-        print("The player go first")
+        P_S(combat_colour_font + "You move weapon in had ready to face whatever this cursed place throw at you!")
         while monster_alive is True and player_alive is True:
             player_action = input(
                 """Selec your action:
@@ -281,12 +284,22 @@ def encounter(player_character):
                 player_attack(player_character, new_monster)
                 if new_monster.hp == 0:
                     monster_alive = False
-                    print("The goblin is dead!")
+                    P_S("With a swift strike the monster falls blood spurting")
                     break
             elif player_action == "2":
                 print("PLayer defend")
+                player_character.armour = player_character.armour + 2
+                player_character.attack = player_character.attack - 1
+                player_attack(player_character, new_monster)
+                if new_monster.hp == 0:
+                    monster_alive = False
+                    P_S("With a swift strike the monster falls blood spurting")
+                    break
+                player_character.armour = player_character.armour - 2
+                player_character.attack = player_character.attack + 1
             elif player_action == "3":
-                print("player is healing up")
+                print("Reaching to your pouch you gulp down the red potion")
+                player_character.healing_up()
             else:
                 print("That is not action you can do!")
 
@@ -298,7 +311,7 @@ def encounter(player_character):
                     game_over()
 
     else:
-        print("The monster go first")
+        print("The enemy moves with inhuman speed and is ready to strike!")
         while monster_alive is True and player_alive is True:
             print("The monster attack!")
             monster_attack(new_monster, player_character)
@@ -324,7 +337,7 @@ def encounter(player_character):
             elif player_action == "3":
                 print("player is healing up")
             else:
-                print("That is not action you can do!")
+                print("That is not action you can do!" + reset_font_style)
 
 def first_floor_action(player_character):
     """
