@@ -69,4 +69,37 @@ def thrid_floor():
     P_S("you start to make your way to the stair.")
     P_S("Passing in front of what looks like luxurious shops you wonder")
     P_S("if there will be something of value left..." + reset_font_style)
-    
+
+
+def final_fight_description():
+    """
+    This functions describes the final fight.
+    """
+    P_S(description_colour_font + "You climb the last flight and reach the old throne room")
+    P_S("The rotten meat smell is everywhere, with horror you understand")
+    P_S("Now where the bodies of the inhabitants are...")
+    P_S("Human skink decorates the walls as terribles tapestries and in the middle")
+    P_S("A column of twisted flesh raises with the gem on top")
+    P_S("You can make the faces and limb in that horrendous construction")
+    P_S("Before you, the guardian of this terrible room starts to rise. An abomination")
+    P_S("The monstrous creature wears human remains as if a improvised armor")
+    P_S("Moving towards you a blade of bone appears from what looks like their arm")
+    P_S("Steeling yourself, you grip firmly your own blade and face the creature" + reset_font_style)
+
+def player_final_fight_victory():
+    """
+    This function will display the description of the player winning
+    """
+    P_S(description_colour_font + "The abomonination lays dead at your feet")
+    P_S("completely inmobile. The changing faces and twisted limb that just a moment")
+    P_S("wanted to tear your apart are finally resting. You shudder at the destiny of")
+    P_S("the dwellers of the city. Such a horrible fate.")
+    P_S("turning to the last steps you can see the glitter gem finally at reach!" +reset_font_style)
+
+def player_death():
+    """
+    This functions gives a brief description when the player health_point reach zero
+    """
+    P_S("The last thing you see is a blow passing your defense. You almost felt no pain")
+    P_S("with darkness engulfing you. The monster stand before you baring their fangs")
+    P_S(".....")
