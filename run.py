@@ -4,6 +4,13 @@ from tokenize import PseudoExtras
 from functions import *
 from colored import fg, bg, attr
 
+
+title_colour_font = fg(69)
+description_colour_font = fg(191)
+floor_choice_colour = fg(214)
+combat_colour_font = fg(125)
+reset_font_style = attr(0)
+
 class Player:
     """
     This create an instance for the player
@@ -441,7 +448,7 @@ def main():
     Main Game function
     """
     player_character = Player()
-    print(
+    print( title_colour_font +
     """
 _________          _______    _______  _______  _______   _________ _       
 \__   __/|\     /|(  ____ \  (  ____ \(  ____ \(       )  \__   __/( (    /|
@@ -460,7 +467,7 @@ _________          _______   _________ _______           _______  _______
    | |   | (   ) || (           | |   | |   | || || || || (      | (\ (   
    | |   | )   ( || (____/\     | |   | (___) || () () || (____/\| ) \ \__
    )_(   |/     \|(_______/     )_(   (_______)(_______)(_______/|/   \__/    
-    """)
+    """ + reset_font_style)
 
     while True:
         player_character.name = input(
