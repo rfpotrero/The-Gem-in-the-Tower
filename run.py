@@ -1,5 +1,4 @@
 import random
-import time
 from tokenize import PseudoExtras
 from functions import *
 from colored import fg, bg, attr
@@ -65,16 +64,16 @@ class FinalBoss:
         self.initiative = 2
         self.armour = 10
 
-def dice_roll(number_of_dices):
-    """
-    Generic functions to resolve any other roll dices
-    """
-    results = []
-    for dice in range(number_of_dices):
-        roll = random.randint(1, 6)
-        results.append(roll)
-    dice_result = sum[results]
-    return dice_result
+# def dice_roll(number_of_dices):
+#     """
+#     Generic functions to resolve any other roll dices
+#     """
+#     results = []
+#     for dice in range(number_of_dices):
+#         roll = random.randint(1, 6)
+#         results.append(roll)
+#     dice_result = sum[results]
+#     return dice_result
 
 def attack_roll(number_of_dices):
     """
@@ -181,7 +180,7 @@ def final_fight(player_character):
     player_alive = True
 
     dragon = FinalBoss()
-    print("You are face again the final boss of the tower")
+    final_fight_description()
     print("The dragon prepares to attack")
     while boss_alive is True and player_alive is True:
         boss_attack =  type_of_attack[random.randint(0, 2)]
@@ -203,7 +202,7 @@ def final_fight(player_character):
             dragon.armour = dragon.armour + 2
             if player_character.hp == 0:
                 player_alive = False
-                print("The human is dead!")
+                player_death()
                 break
         elif boss_attack == "fast attack" and player_choice == "2":
             print("You shield raised in a perfect block")
@@ -211,7 +210,7 @@ def final_fight(player_character):
             monster_attack(dragon, player_character)
             if player_character.hp == 0:
                 player_alive = False
-                print("The human is dead!")
+                player_death()
                 break
             dragon.attack = dragon.attack + 1
             player_attack(player_character, dragon)
@@ -231,7 +230,7 @@ def final_fight(player_character):
             monster_attack(dragon, player_character)
             if player_character.hp == 0:
                 player_alive = False
-                print("The human is dead!")
+                player_death()
                 break
             dragon.armour = dragon.armour - 2
             dragon.attack = dragon.attack + 2
@@ -247,14 +246,14 @@ def final_fight(player_character):
                 monster_attack(dragon, player_character)
                 if player_character.hp == 0:
                     player_alive = False
-                    print("The human is dead!")
+                    player_death()
                     break
                 dragon.attack = dragon.attack - 2
             if boss_attack == "fast_attack":
                 monster_attack(dragon, player_character)
                 if player_character.hp == 0:
                     player_alive = False
-                    print("The human is dead!")
+                    player_death()
                     break
                 player_attack(player_character, dragon)
                 if dragon.hp == 0:
@@ -271,20 +270,20 @@ def encounter(player_character):
     player_alive = True
 
     if player_character.initiative >= new_monster.initiative:
-        P_S(combat_colour_font + "You move weapon in had ready to face whatever this cursed place throw at you!")
+        P_S(combat_colour_font + "You move weapon in had ready to face whatever this cursed place throw at you!" + reset_font_style)
         while monster_alive is True and player_alive is True:
-            player_action = input(
+            player_action = input(floor_choice_colour +
                 """Selec your action:
                 1- Attack
                 2- Defend
                 3- Heal
-                """
+                """ + reset_font_style
             )
             if player_action == "1":
                 player_attack(player_character, new_monster)
                 if new_monster.hp == 0:
                     monster_alive = False
-                    P_S("With a swift strike the monster falls blood spurting")
+                    P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
                     break
             elif player_action == "2":
                 print("PLayer defend")
@@ -293,7 +292,7 @@ def encounter(player_character):
                 player_attack(player_character, new_monster)
                 if new_monster.hp == 0:
                     monster_alive = False
-                    P_S("With a swift strike the monster falls blood spurting")
+                    P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
                     break
                 player_character.armour = player_character.armour - 2
                 player_character.attack = player_character.attack + 1
@@ -388,14 +387,14 @@ def second_floor_action(player_character):
     """
     Second floor actions description and result.
     """
-    P_S("Wandering through the dead city you spot the familiar sing of a smith")
+    P_S(description_colour_font + "Wandering through the dead city you spot the familiar sing of a smith")
     P_S("It is massive building the big forges now dark and dead but")
     P_S("you can easily imagine how busy this building and the sound of hammering")
     P_S("There might be some items left behind inside the massive building")
-    P_S("it will make you take a detour and add a few hours...would it be worhty?")
-    P_S("What you would?")
+    P_S("it will make you take a detour and add a few hours...would it be worhty?" + reset_font_style)
+    P_S(floor_choice_colour + "What you would?")
     P_S("")
-    second_floor_choice = input(description_colour_font + """
+    second_floor_choice = input("""
     1- Enter the forge
     2- Whatever is there is not worthy
     """ + reset_font_style)
@@ -496,7 +495,7 @@ _________          _______   _________ _______           _______  _______
             break
         else:
             print("I am afraid do not understsand that. Can you say it again?")
-    description_colour_font
+    
     intro()
     first_floor()
     first_floor_action(player_character)
