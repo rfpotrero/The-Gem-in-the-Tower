@@ -7,7 +7,7 @@ from colored import fg, bg, attr
 title_colour_font = fg(69)
 description_colour_font = fg(191)
 floor_choice_colour = fg(214)
-combat_colour_font = fg(125)
+combat_colour_font = fg(124)
 reset_font_style = attr(0)
 
 class Player:
@@ -63,17 +63,6 @@ class FinalBoss:
         self.attack = attack
         self.initiative = 2
         self.armour = 10
-
-# def dice_roll(number_of_dices):
-#     """
-#     Generic functions to resolve any other roll dices
-#     """
-#     results = []
-#     for dice in range(number_of_dices):
-#         roll = random.randint(1, 6)
-#         results.append(roll)
-#     dice_result = sum[results]
-#     return dice_result
 
 def attack_roll(number_of_dices):
     """
@@ -181,10 +170,10 @@ def final_fight(player_character):
 
     dragon = FinalBoss()
     final_fight_description()
-    print("The dragon prepares to attack")
+    P_S(combat_colour_font + "The abomination moves towards you!")
     while boss_alive is True and player_alive is True:
         boss_attack =  type_of_attack[random.randint(0, 2)]
-        print(f"The dragon is preparing a {boss_attack} you what are you going to do!")
+        P_S(f"The abomination is preparing a {boss_attack} you what are you going to do!")
         player_choice =input("""
         1- Attack
         2- Defend 
@@ -192,7 +181,7 @@ def final_fight(player_character):
         """)
         if boss_attack == "powerful attack" and player_choice == "1":
             dragon.armour = dragon.armour  - 2
-            print("You move faster and attack the dragon while preparing the attack")
+            P_S("Moving before the abomination could delivery the blow you attack!")
             player_attack(player_character, dragon)
             if dragon.hp == 0:
                 boss_alive = False
@@ -260,6 +249,7 @@ def final_fight(player_character):
                     boss_alive = False
                     player_final_fight_victory()
                     break
+    P_S("" + reset_font_style)
 
 def encounter(player_character):
     """
@@ -310,7 +300,7 @@ def encounter(player_character):
                     game_over()
 
     else:
-        print("The enemy moves with inhuman speed and is ready to strike!")
+        P_S(combat_colour_font + "The enemy moves with inhuman speed and is ready to strike!")
         while monster_alive is True and player_alive is True:
             print("The monster attack!")
             monster_attack(new_monster, player_character)
@@ -337,6 +327,7 @@ def encounter(player_character):
                 print("player is healing up")
             else:
                 print("That is not action you can do!" + reset_font_style)
+        P_S("" + reset_font_style)
 
 def first_floor_action(player_character):
     """
@@ -424,7 +415,8 @@ def second_floor_action(player_character):
     elif second_floor_choice == "2":
         P_S(description_colour_font + "You left the building behind an continue to move towards the main street")
         P_S("a wide avenue that in better time for sure would have been a breath taking sight")
-        P_S("the street appears to converge in what looks like the access to upwards..." + reset_font_style)
+        P_S("the street appears to converge in what looks like the access to upwards...") 
+        P_S("" + reset_font_style)
 
 def third_floor_action(player_character):
     """
@@ -445,7 +437,8 @@ def third_floor_action(player_character):
             P_S("about pack your bags with as many jewels and have a good life")
             P_S("your hand is almost reaching to an exquisite crown when")
             P_S("a gurgling noise raise from the end of the shop followed by a")
-            P_S("create stumbling towards you" + reset_font_style)
+            P_S("create stumbling towards you")
+            P_S("" + reset_font_style)
             P_S(combat_colour_font + "Get ready!"  + reset_font_style)
             encounter(player_attack)
         else:
@@ -492,14 +485,14 @@ _________          _______   _________ _______           _______  _______
     """ + reset_font_style)
 
     while True:
-        player_character.name = input(
+        player_character.name = input(description_colour_font + 
             "Welcome to the tower what is your name adveturer?"
         )
         if player_character.name.isalpha():
             print(f"Very well {player_character.name} you are free to enter")
             break
         else:
-            print("I am afraid do not understsand that. Can you say it again?")
+            print("I am afraid do not understsand that. Can you say it again?" + reset_font_style)
     
     intro()
     first_floor()
@@ -507,6 +500,7 @@ _________          _______   _________ _______           _______  _______
     second_floor()
     second_floor_action(player_character)
     thrid_floor()
+    third_floor_action(player_character)
     final_fight(player_character)
 
 
