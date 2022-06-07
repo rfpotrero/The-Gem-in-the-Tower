@@ -18,7 +18,7 @@ def P_S(text):
     I have slightly change the function to hardcoding the time parameters.
     """
     print(text)
-    time.sleep(1)
+    time.sleep(0.1)
 
 def intro():
     """
@@ -29,7 +29,6 @@ def intro():
     P_S("The tower is the only human construction you can see since days")
     P_S("and the gem on the top, as in the legends, shines like a light house")
     P_S("guiding you towards the city.")
-    P_S(".....")
     P_S("" + reset_font_style)
 
 def first_floor():
@@ -42,19 +41,20 @@ def first_floor():
     P_S("Placing your shoulder again the gate, it opened with a rasping")
     P_S("screech of rusty hinges.")
     P_S("The opened gate gave directly into a long, broad hall which ran away")
-    P_S("and away until its vista grew indistinct in the distance." + reset_font_style)
+    P_S("and away until its vista grew indistinct in the distance.")
+    P_S("" + reset_font_style)
 
 def second_floor():
     """
     This display the second floor description.
     """
     P_S(description_colour_font + "Your eyes widenen after reaching the end of the stairs")
-    P_S("Before you appear what is seems a completed city the roof missing in the distance")
+    P_S("Before you appear what is seems a completed city encased within the walls")
     P_S("No chambers, no gates. These people built their entery city inside.")
     P_S("Talls building surrounding you and the same eerie feeling floats around you")
     P_S("Searching through some of the shops and houses you see similar scenes")
-    P_S("interrupted meals, works half finished but no bodies to be seen..." + reset_font_style)
-
+    P_S("interrupted meals, works half finished but no bodies to be seen...") 
+    P_S("" + reset_font_style)
 def thrid_floor():
     """
     This display the third floor description.
