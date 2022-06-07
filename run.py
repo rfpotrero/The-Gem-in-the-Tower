@@ -16,64 +16,117 @@ class Player:
     """
 
     def __init__(self):
-        hp = random.randint(1, 3)
-        attack = random.randint(2, 3)
-        # initiative = random.randint(1, 6)
-        self.hp = hp
-        self.max_hp = hp
-        self.attack = attack
-        self.initiative = 1
+        health_points = random.randint(1, 3)
+        initiative = random.randint(1, 6)
+        self.health_points = health_points
+        self.max_health_points = health_points
+        self.attack = 3
+        self.initiative = initiative
         self.armour = 12
         self.name = ""
     def healing_up(self):
         """
         Method to calculate healing
         """
-        if self.max_hp == self.hp:
+        if self.max_health_points == self.health_points:
             print("You don't need to healyourself")
         else:
-            self.hp = self.hp + 2
-            print("You healed 2 hp")
+            self.health_points = self.health_points + 2
+            print("You healed 2 health_points")
 
-class Monster:
-    """
-    This create an instance of monster
-    """
+    def attack_roll(self,number_of_dices):
+        """
+        This is used to generate the rolls for attacks.
+        """
+        attack_roll_result = 0
+        for dice in range(number_of_dices):
+            roll = random.randint(1, 6)
+            attack_roll_result += roll
+        return attack_roll_result
 
-    def __init__(self):
+def monster_alive(new_monster):
+    if new_monster.health_points == 0:
+        monster_alive = False
+        P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
+        
 
-        hp = 1
-        attack = random.randint(2, 3)
-        # initiative = random.randint(1, 6)
-        self.hp = hp
-        self.attack = attack
-        self.initiative = 2
-        self.armour = 10
+def encounter(player_character):
+    """
+    This is used to represent the fight with a monster and advance to the next tower's level
+    """
+    new_monster = Player()
+    monster_alive = True
+    player_alive = True
 
-class FinalBoss:
-    """
-    This generate the final boss
-    """
-    def __init__(self):
+    if player_character.initiative >= new_monster.initiative:
+        P_S(combat_colour_font + "You move weapon in had ready to face whatever this cursed place throw at you!" + reset_font_style)
+        while monster_alive is True and player_alive is True:
+            player_action = input(combat_colour_font +
+                """Select your action:
+                1- Attack
+                2- Defend
+                3- Heal
+                """ + reset_font_style
+            )
+            if player_action == "1":
+                player_character.attack(new_monster)
+                if new_monster.health_points == 0:
+                    monster_alive = False
+                    P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
+                    break
+            elif player_action == "2":
+                print("PLayer defend")
+                player_character.armour = player_character.armour + 2
+                player_character.attack = player_character.attack - 1
+                player_attack(player_character, new_monster)
+                if new_monster.health_points == 0:
+                    monster_alive = False
+                    P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
+                    break
+                player_character.armour = player_character.armour - 2
+                player_character.attack = player_character.attack + 1
+            elif player_action == "3":
+                print("Reaching to your pouch you gulp down the red potion")
+                player_character.healing_up()
+            else:
+                print("That is not action you can do!")
 
-        hp = 1
-        attack = random.randint(2, 3)
-        # initiative = random.randint(1, 6)
-        self.hp = hp
-        self.attack = attack
-        self.initiative = 2
-        self.armour = 10
+            if monster_alive is True:
+                print("The monster attack!")
+                monster_attack(new_monster, player_character)
+                if player_character.health_points == 0:
+                    player_alive = False
+                    game_over()
 
-def attack_roll(number_of_dices):
-    """
-    This is used to generate the rolls for attacks.
-    """
-    results = []
-    for dice in range(number_of_dices):
-        roll = random.randint(1, 6)
-        results.append(roll)
-        attack_roll_dice = sum(results)
-    return attack_roll_dice
+    else:
+        P_S(combat_colour_font + "The enemy moves with inhuman speed and is ready to strike!")
+        while monster_alive is True and player_alive is True:
+            print("The monster attack!")
+            monster_attack(new_monster, player_character)
+            if player_character.health_points == 0:
+                player_alive = False
+                game_over()
+
+            player_action = input(
+                """Selec your action:
+                1- Attack
+                2- Defend
+                3- Heal
+                """
+            )
+            if player_action == "1":
+                player_attack(player_character, new_monster)
+                if new_monster.health_points == 0:
+                    monster_alive = False
+                    print("The goblin is dead!")
+                    break
+            elif player_action == "2":
+                print("PLayer defend")
+            elif player_action == "3":
+                print("player is healing up")
+            else:
+                print("That is not action you can do!" + reset_font_style)
+        P_S("" + reset_font_style)
 
 def chance_of_encounter(odds_chance):
     """
@@ -87,30 +140,30 @@ def chance_of_encounter(odds_chance):
     if probability  >= odds_chance:
         return True
 
-def player_attack(player_character, new_monster):
-    """
-    Fuction used to calculate if an injuried is inflicted
-    """
-    print("Player Attack!")
-    player_attack_roll = attack_roll(player_character.attack)
-    if player_attack_roll >= new_monster.armour:
-        print("The player hit the monster")
-        print(player_attack_roll)
-        new_monster.hp = new_monster.hp - 1
-    else:
-        print("The player attack failed")
-        print(player_attack_roll)
+# def player_attack(player_character, new_monster):
+#     """
+#     Fuction used to calculate if an injuried is inflicted
+#     """
+#     print("Player Attack!")
+#     player_attack_roll = attack_roll(player_character.attack)
+#     if player_attack_roll >= new_monster.armour:
+#         print("The player hit the monster")
+#         print(player_attack_roll)
+#         new_monster.health_points = new_monster.health_points - 1
+#     else:
+#         print("The player attack failed")
+#         print(player_attack_roll)
 
-def monster_attack(new_monster, player_character):
-    """
-    Fuction used to calculate if an injuried is inflicted
-    """
-    monster_attack_roll = attack_roll(new_monster.attack)
-    if monster_attack_roll >= player_character.armour:
-        print("The monster hit the player")
-        player_character.hp = player_character.hp - 1
-    else:
-        print("The monster attack failed")
+# def monster_attack(new_monster, player_character):
+#     """
+#     Fuction used to calculate if an injuried is inflicted
+#     """
+#     monster_attack_roll = attack_roll(new_monster.attack)
+#     if monster_attack_roll >= player_character.armour:
+#         print("The monster hit the player")
+#         player_character.health_points = player_character.health_points - 1
+#     else:
+#         print("The monster attack failed")
 
 def after_combat(player_character):
     """
@@ -183,13 +236,13 @@ def final_fight(player_character):
             dragon.armour = dragon.armour  - 2
             P_S("Moving before the abomination could delivery the blow you attack!")
             player_attack(player_character, dragon)
-            if dragon.hp == 0:
+            if dragon.health_points == 0:
                 boss_alive = False
                 player_final_fight_victory()
                 break
             monster_attack(dragon, player_character)
             dragon.armour = dragon.armour + 2
-            if player_character.hp == 0:
+            if player_character.health_points == 0:
                 player_alive = False
                 player_death()
                 break
@@ -197,13 +250,13 @@ def final_fight(player_character):
             print("You shield raised in a perfect block")
             dragon.attack = dragon.attack - 1
             monster_attack(dragon, player_character)
-            if player_character.hp == 0:
+            if player_character.health_points == 0:
                 player_alive = False
                 player_death()
                 break
             dragon.attack = dragon.attack + 1
             player_attack(player_character, dragon)
-            if dragon.hp == 0:
+            if dragon.health_points == 0:
                 boss_alive = False
                 player_final_fight_victory()
                 break
@@ -212,12 +265,12 @@ def final_fight(player_character):
             dragon.attack = dragon.attack - 2
             print("The dragon defend himself")
             player_attack(player_character, dragon)
-            if dragon.hp == 0:
+            if dragon.health_points == 0:
                 boss_alive = False
                 player_final_fight_victory()
                 break
             monster_attack(dragon, player_character)
-            if player_character.hp == 0:
+            if player_character.health_points == 0:
                 player_alive = False
                 player_death()
                 break
@@ -228,106 +281,30 @@ def final_fight(player_character):
             if boss_attack == "powerful_attack":
                 dragon.attack = dragon.attack + 2
                 player_attack(player_character, dragon)
-                if dragon.hp == 0:
+                if dragon.health_points == 0:
                     boss_alive = False
                     player_final_fight_victory()
                     break
                 monster_attack(dragon, player_character)
-                if player_character.hp == 0:
+                if player_character.health_points == 0:
                     player_alive = False
                     player_death()
                     break
                 dragon.attack = dragon.attack - 2
             if boss_attack == "fast_attack":
                 monster_attack(dragon, player_character)
-                if player_character.hp == 0:
+                if player_character.health_points == 0:
                     player_alive = False
                     player_death()
                     break
                 player_attack(player_character, dragon)
-                if dragon.hp == 0:
+                if dragon.health_points == 0:
                     boss_alive = False
                     player_final_fight_victory()
                     break
     P_S("" + reset_font_style)
 
-def encounter(player_character):
-    """
-    This is used to represent the fight with a monster and advance to the next tower's level
-    """
-    new_monster = Monster()
-    monster_alive = True
-    player_alive = True
 
-    if player_character.initiative >= new_monster.initiative:
-        P_S(combat_colour_font + "You move weapon in had ready to face whatever this cursed place throw at you!" + reset_font_style)
-        while monster_alive is True and player_alive is True:
-            player_action = input(floor_choice_colour +
-                """Selec your action:
-                1- Attack
-                2- Defend
-                3- Heal
-                """ + reset_font_style
-            )
-            if player_action == "1":
-                player_attack(player_character, new_monster)
-                if new_monster.hp == 0:
-                    monster_alive = False
-                    P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
-                    break
-            elif player_action == "2":
-                print("PLayer defend")
-                player_character.armour = player_character.armour + 2
-                player_character.attack = player_character.attack - 1
-                player_attack(player_character, new_monster)
-                if new_monster.hp == 0:
-                    monster_alive = False
-                    P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
-                    break
-                player_character.armour = player_character.armour - 2
-                player_character.attack = player_character.attack + 1
-            elif player_action == "3":
-                print("Reaching to your pouch you gulp down the red potion")
-                player_character.healing_up()
-            else:
-                print("That is not action you can do!")
-
-            if monster_alive is True:
-                print("The monster attack!")
-                monster_attack(new_monster, player_character)
-                if player_character.hp == 0:
-                    player_alive = False
-                    game_over()
-
-    else:
-        P_S(combat_colour_font + "The enemy moves with inhuman speed and is ready to strike!")
-        while monster_alive is True and player_alive is True:
-            print("The monster attack!")
-            monster_attack(new_monster, player_character)
-            if player_character.hp == 0:
-                player_alive = False
-                game_over()
-
-            player_action = input(
-                """Selec your action:
-                1- Attack
-                2- Defend
-                3- Heal
-                """
-            )
-            if player_action == "1":
-                player_attack(player_character, new_monster)
-                if new_monster.hp == 0:
-                    monster_alive = False
-                    print("The goblin is dead!")
-                    break
-            elif player_action == "2":
-                print("PLayer defend")
-            elif player_action == "3":
-                print("player is healing up")
-            else:
-                print("That is not action you can do!" + reset_font_style)
-        P_S("" + reset_font_style)
 
 def first_floor_action(player_character):
     """
@@ -450,7 +427,7 @@ def third_floor_action(player_character):
             P_S("the ring. It feels warm and comforting in your hand. Suddenly the")
             P_S("the old and new injuries seems to hurt less..")
             P_S("" + reset_font_style)
-            player_character.hp = player_character.hp + 1
+            player_character.health_points = player_character.health_points + 1
     else:
         P_S(description_colour_font + "You are no here for this! The final prize will make looks this like a cheap")
         P_S("glass and tin copy. Steeling yourself you push forward to the stair")
