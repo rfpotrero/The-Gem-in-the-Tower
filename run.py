@@ -33,16 +33,28 @@ class Player:
         else:
             self.health_points = self.health_points + 2
             print("You healed 2 health_points")
+    def player_attack(self, other_oponent):
+        """
+        Fuction used to calculate if an injuried is inflicted
+        """
+        player_attack_roll = attack_roll(self.attack)
+        if player_attack_roll >= other_oponent.armour:
+            print("The attack was successful!")
+            print(player_attack_roll)
+            other_oponent.health_points = other_oponent.health_points - 1
+        else:
+            print("The player failed")
+            print(player_attack_roll)
 
-    def attack_roll(self,number_of_dices):
-        """
-        This is used to generate the rolls for attacks.
-        """
-        attack_roll_result = 0
-        for dice in range(number_of_dices):
-            roll = random.randint(1, 6)
-            attack_roll_result += roll
-        return attack_roll_result
+def attack_roll(number_of_dices):
+    """
+    This is used to generate the rolls for attacks.
+    """
+    attack_roll_result = 0
+    for dice in range(number_of_dices):
+        roll = random.randint(1, 6)
+        attack_roll_result += roll
+    return attack_roll_result
 
 def monster_alive(new_monster):
     if new_monster.health_points == 0:
@@ -139,31 +151,6 @@ def chance_of_encounter(odds_chance):
     probability = event_outcome * 10
     if probability  >= odds_chance:
         return True
-
-# def player_attack(player_character, new_monster):
-#     """
-#     Fuction used to calculate if an injuried is inflicted
-#     """
-#     print("Player Attack!")
-#     player_attack_roll = attack_roll(player_character.attack)
-#     if player_attack_roll >= new_monster.armour:
-#         print("The player hit the monster")
-#         print(player_attack_roll)
-#         new_monster.health_points = new_monster.health_points - 1
-#     else:
-#         print("The player attack failed")
-#         print(player_attack_roll)
-
-# def monster_attack(new_monster, player_character):
-#     """
-#     Fuction used to calculate if an injuried is inflicted
-#     """
-#     monster_attack_roll = attack_roll(new_monster.attack)
-#     if monster_attack_roll >= player_character.armour:
-#         print("The monster hit the player")
-#         player_character.health_points = player_character.health_points - 1
-#     else:
-#         print("The monster attack failed")
 
 def after_combat(player_character):
     """
