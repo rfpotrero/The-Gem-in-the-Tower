@@ -1,7 +1,9 @@
+"""
+Module execute the game
+"""
 import random
-from tokenize import PseudoExtras
-from functions import *
-from colored import fg, bg, attr
+from colored import fg, attr
+from functions import (P_S, intro, first_floor, second_floor,  thrid_floor, player_final_fight_victory, player_death, game_ending_description)
 
 
 title_colour_font = fg(69)
@@ -9,6 +11,7 @@ description_colour_font = fg(191)
 floor_choice_colour = fg(214)
 combat_colour_font = fg(124)
 reset_font_style = attr(0)
+
 
 class Player:
     """
@@ -24,6 +27,7 @@ class Player:
         self.initiative = initiative
         self.armour = 12
         self.name = ""
+
     def healing_up(self):
         """
         Method to calculate healing
@@ -33,6 +37,7 @@ class Player:
         else:
             self.health_points = self.health_points + 2
             print("You healed 2 health_points")
+
     def character_attack(self, other_oponent):
         """
         Fuction used to calculate if an injuried is inflicted
@@ -46,6 +51,7 @@ class Player:
             print("The player failed")
             print(character_attack_roll)
 
+
 def attack_roll(number_of_dices):
     """
     This is used to generate the rolls for attacks.
@@ -56,11 +62,6 @@ def attack_roll(number_of_dices):
         attack_roll_result += roll
     return attack_roll_result
 
-def monster_alive(new_monster):
-    if new_monster.health_points == 0:
-        monster_alive = False
-        P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
-        
 
 def encounter(player_character):
     """
@@ -71,29 +72,43 @@ def encounter(player_character):
     player_alive = True
 
     if player_character.initiative >= new_monster.initiative:
-        P_S(combat_colour_font + "You move weapon in had ready to face whatever this cursed place throw at you!" + reset_font_style)
+        P_S(
+            combat_colour_font
+            + "You move weapon in had ready to face whatever this cursed place throw at you!"
+            + reset_font_style
+        )
         while monster_alive is True and player_alive is True:
-            player_action = input(combat_colour_font +
-                """Select your action:
+            player_action = input(
+                combat_colour_font
+                + """Select your action:
                 1- Attack
                 2- Defend
                 3- Heal
-                """ + reset_font_style
+                """
+                + reset_font_style
             )
             if player_action == "1":
-                player_character.attack(new_monster)
+                player_character.character_attack(new_monster)
                 if new_monster.health_points == 0:
                     monster_alive = False
-                    P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
+                    P_S(
+                        combat_colour_font
+                        + "With a swift strike the monster falls blood spurting"
+                        + reset_font_style
+                    )
                     break
             elif player_action == "2":
                 print("PLayer defend")
                 player_character.armour = player_character.armour + 2
                 player_character.attack = player_character.attack - 1
-                player_attack(player_character, new_monster)
+                player_character.character_attack(new_monster)
                 if new_monster.health_points == 0:
                     monster_alive = False
-                    P_S(combat_colour_font + "With a swift strike the monster falls blood spurting" + reset_font_style)
+                    P_S(
+                        combat_colour_font
+                        + "With a swift strike the monster falls blood spurting"
+                        + reset_font_style
+                    )
                     break
                 player_character.armour = player_character.armour - 2
                 player_character.attack = player_character.attack + 1
@@ -105,16 +120,19 @@ def encounter(player_character):
 
             if monster_alive is True:
                 print("The monster attack!")
-                monster_attack(new_monster, player_character)
+                new_monster.character_attack(player_character)
                 if player_character.health_points == 0:
                     player_alive = False
                     game_over()
 
     else:
-        P_S(combat_colour_font + "The enemy moves with inhuman speed and is ready to strike!")
+        P_S(
+            combat_colour_font
+            + "The enemy moves with inhuman speed and is ready to strike!"
+        )
         while monster_alive is True and player_alive is True:
             print("The monster attack!")
-            monster_attack(new_monster, player_character)
+            new_monster.character_attack(player_character)
             if player_character.health_points == 0:
                 player_alive = False
                 game_over()
@@ -127,7 +145,7 @@ def encounter(player_character):
                 """
             )
             if player_action == "1":
-                player_attack(player_character, new_monster)
+                player_character.character_attack(new_monster)
                 if new_monster.health_points == 0:
                     monster_alive = False
                     print("The goblin is dead!")
@@ -140,6 +158,7 @@ def encounter(player_character):
                 print("That is not action you can do!" + reset_font_style)
         P_S("" + reset_font_style)
 
+
 def chance_of_encounter(odds_chance):
     """
     This will calculate the chance of encounter while
@@ -147,10 +166,11 @@ def chance_of_encounter(odds_chance):
     Credits to Daniel Poston for the main code
     https://www.datacamp.com/tutorial/statistics-python-tutorial-probability-1
     """
-    event_outcome = random.randint(0,10)
+    event_outcome = random.randint(0, 10)
     probability = event_outcome * 10
-    if probability  >= odds_chance:
+    if probability >= odds_chance:
         return True
+
 
 def after_combat(player_character):
     """
@@ -180,6 +200,7 @@ def after_combat(player_character):
     else:
         print("You need to select a valid action")
 
+
 def game_over():
     """
     This function will end the current game when a player health_points
@@ -188,16 +209,19 @@ def game_over():
     player_death()
     P_S("The game is over")
     P_S("Do you have to play again?")
-    game_over_option = input("""
+    game_over_option = input(
+        """
     1- Play again
     2- Quit
-    """)
+    """
+    )
     if game_over_option == "1":
         main()
     elif game_over_option == "2":
         exit()
     else:
         print("Please select a valid option")
+
 
 def final_fight(player_character):
     """
@@ -208,89 +232,92 @@ def final_fight(player_character):
     boss_alive = True
     player_alive = True
 
-    dragon = FinalBoss()
+    abomination = Player()
     final_fight_description()
     P_S(combat_colour_font + "The abomination moves towards you!")
     while boss_alive is True and player_alive is True:
-        boss_attack =  type_of_attack[random.randint(0, 2)]
-        P_S(f"The abomination is preparing a {boss_attack} you what are you going to do!")
-        player_choice =input("""
+        boss_attack = type_of_attack[random.randint(0, 2)]
+        P_S(
+            f"The abomination is preparing a {boss_attack} you what are you going to do!"
+        )
+        player_choice = input(
+            """
         1- Attack
-        2- Defend 
+        2- Defend
         3- heal
-        """)
+        """
+        )
         if boss_attack == "powerful attack" and player_choice == "1":
-            dragon.armour = dragon.armour  - 2
+            abomination.armour = abomination.armour - 2
             P_S("Moving before the abomination could delivery the blow you attack!")
-            player_attack(player_character, dragon)
-            if dragon.health_points == 0:
+            player_character.character_attack(abomination)
+            if abomination.health_points == 0:
                 boss_alive = False
                 player_final_fight_victory()
                 break
-            monster_attack(dragon, player_character)
-            dragon.armour = dragon.armour + 2
+            abomination.character_attack(player_character)
+            abomination.armour = abomination.armour + 2
             if player_character.health_points == 0:
                 player_alive = False
                 player_death()
                 break
         elif boss_attack == "fast attack" and player_choice == "2":
             print("You shield raised in a perfect block")
-            dragon.attack = dragon.attack - 1
-            monster_attack(dragon, player_character)
+            abomination.attack = abomination.attack - 1
+            abomination.character_attack(player_character)
             if player_character.health_points == 0:
                 player_alive = False
                 player_death()
                 break
-            dragon.attack = dragon.attack + 1
-            player_attack(player_character, dragon)
-            if dragon.health_points == 0:
+            abomination.attack = abomination.attack + 1
+            player_character.character_attack(abomination)
+            if abomination.health_points == 0:
                 boss_alive = False
                 player_final_fight_victory()
                 break
         elif boss_attack == "defend":
-            dragon.armour = dragon.armour + 2
-            dragon.attack = dragon.attack - 2
-            print("The dragon defend himself")
-            player_attack(player_character, dragon)
-            if dragon.health_points == 0:
+            abomination.armour = abomination.armour + 2
+            abomination.attack = abomination.attack - 2
+            print("The abomination defend himself")
+            player_character.character_attack(abomination)
+            if abomination.health_points == 0:
                 boss_alive = False
                 player_final_fight_victory()
                 break
-            monster_attack(dragon, player_character)
+            abomination.character_attack(player_character)
             if player_character.health_points == 0:
                 player_alive = False
                 player_death()
                 break
-            dragon.armour = dragon.armour - 2
-            dragon.attack = dragon.attack + 2
+            abomination.armour = abomination.armour - 2
+            abomination.attack = abomination.attack + 2
 
         else:
             if boss_attack == "powerful_attack":
-                dragon.attack = dragon.attack + 2
-                player_attack(player_character, dragon)
-                if dragon.health_points == 0:
+                abomination.attack = abomination.attack + 2
+                player_character.character_attack(abomination)
+                if abomination.health_points == 0:
                     boss_alive = False
                     player_final_fight_victory()
                     break
-                monster_attack(dragon, player_character)
+                abomination.character_attack(player_character)
                 if player_character.health_points == 0:
                     player_alive = False
                     player_death()
                     break
-                dragon.attack = dragon.attack - 2
+                abomination.attack = abomination.attack - 2
             if boss_attack == "fast_attack":
-                monster_attack(dragon, player_character)
+                abomination.character_attack(player_character)
                 if player_character.health_points == 0:
                     player_alive = False
                     player_death()
                     break
-                player_attack(player_character, dragon)
-                if dragon.health_points == 0:
+                player_character.character_attack(abomination)
+                if abomination.health_points == 0:
                     boss_alive = False
                     player_final_fight_victory()
                     break
     P_S("" + reset_font_style)
-
 
 
 def first_floor_action(player_character):
@@ -299,26 +326,35 @@ def first_floor_action(player_character):
     the actions are different.
 
     Args:
-        player_character (Class): This is the instance created in the main function. 
+        player_character (Class): This is the instance created in the main function.
         It is the player and will be persistent until the end of the game.
     """
-    P_S(description_colour_font + "Dust cover everything in the halls, market stall appear abandod")
+    P_S(
+        description_colour_font
+        + "Dust cover everything in the halls, market stall appear abandod"
+    )
     P_S("As if they all left in a rush")
     P_S("The halls might have something of value")
     P_S("" + reset_font_style)
-    P_S(floor_choice_colour+"What do you want to do?")
+    P_S(floor_choice_colour + "What do you want to do?")
     P_S("1- Search and Prepare")
     P_S("2- Continue climbin the tower")
     first_floor_choice = input("" + reset_font_style)
     if first_floor_choice == "1":
         if chance_of_encounter(80) is True:
-            P_S(description_colour_font + "While searching for anything of value the sound")
+            P_S(
+                description_colour_font
+                + "While searching for anything of value the sound"
+            )
             P_S("a sudden cry pierced the silence and you turn just in")
             P_S("to see a strange creature charging!" + reset_font_style)
-            P_S(combat_colour_font + "Get ready!"+ reset_font_style)
+            P_S(combat_colour_font + "Get ready!" + reset_font_style)
             encounter(player_character)
         else:
-            P_S(description_colour_font + "You were ready to give up and complaint about wasting time")
+            P_S(
+                description_colour_font
+                + "You were ready to give up and complaint about wasting time"
+            )
             P_S("While a bright blade caught your eye a quick cleaning")
             P_S("Reveals an extraordinary weapon that will surely help")
             P_S("on what you will facing ahead.")
@@ -326,100 +362,151 @@ def first_floor_action(player_character):
             player_character.attack = player_character.attack + 2
     elif first_floor_choice == "2":
         if chance_of_encounter(50) is True:
-            P_S( description_colour_font + "Moving forward you spot what looks like the stairs to")
+            P_S(
+                description_colour_font
+                + "Moving forward you spot what looks like the stairs to"
+            )
             P_S("The next level. You are almost at the start of the stairs")
             P_S("When the clash and metal and stone draw you attention")
             P_S("A lonely creature is approaching..." + reset_font_style)
             P_S(combat_colour_font + "Get ready!" + reset_font_style)
             encounter(player_character)
         else:
-            P_S(description_colour_font + "Moving forward you spot what looks like the stairs to")
+            P_S(
+                description_colour_font
+                + "Moving forward you spot what looks like the stairs to"
+            )
             P_S("The next level. You are almost at the start of the stairs")
             P_S("Climbing the startirs is easy, the worn stone under your feet")
-            P_S("Is smooth. While walking you wondered what happened here.." + reset_font_style)
+            P_S(
+                "Is smooth. While walking you wondered what happened here.."
+                + reset_font_style
+            )
     else:
         print("You need to select a valid action")
+
 
 def second_floor_action(player_character):
     """
     Second floor actions description and result.
     """
-    P_S(description_colour_font + "Wandering through the dead city you spot the familiar sing of a smith")
+    P_S(
+        description_colour_font
+        + "Wandering through the dead city you spot the familiar sing of a smith"
+    )
     P_S("It is massive building the big forges now dark and dead but")
     P_S("you can easily imagine how busy this building and the sound of hammering")
     P_S("There might be some items left behind inside the massive building")
     P_S("it will make you take a detour and add a few hours...would it be worhty?")
     P_S("" + reset_font_style)
     P_S(floor_choice_colour + "What you would?")
-    second_floor_choice = input("""
+    second_floor_choice = input(
+        """
     1- Enter the forge
     2- Whatever is there is not worthy
-    """ + reset_font_style)
+    """
+        + reset_font_style
+    )
     if second_floor_choice == "1":
         if chance_of_encounter(80) is True:
-            P_S(description_colour_font + "The makeshift torch hold the darkness at bay")
+            P_S(
+                description_colour_font + "The makeshift torch hold the darkness at bay"
+            )
             P_S("hammers and anvil are starting to rust some still have the pieces")
             P_S("of steel over there as if waiting to be completed...")
             P_S("Suddenly your hair stand up on the back of your neck a pair")
-            P_S("of eyes glow in the darkness getting closer..."+ reset_font_style)
+            P_S("of eyes glow in the darkness getting closer..." + reset_font_style)
             P_S(combat_colour_font + "Get Ready!" + reset_font_style)
             encounter(player_character)
         else:
-            P_S(description_colour_font + "The makeshift torch hold the darkness at bay")
+            P_S(
+                description_colour_font + "The makeshift torch hold the darkness at bay"
+            )
             P_S("hammers and anvil are starting to rust some still have the pieces")
             P_S("of steel over there as if waiting to be completed...")
             P_S("Suddenly your hair stand up on the back of your neck a pair")
             P_S("You turn with your weapon ready....")
             P_S("a quite laugh escape your lips. What looked like enemies is a row")
             P_S("of armour stands..getting closer this marvelous craft still is usable")
-            P_S("You spot a shield the surface smooth and dusty but the straps are sturdy")
-            P_S("and the metal strong. You take it with you, any help is welcome here") 
+            P_S(
+                "You spot a shield the surface smooth and dusty but the straps are sturdy"
+            )
+            P_S("and the metal strong. You take it with you, any help is welcome here")
             P_S("" + reset_font_style)
             player_character.armour = player_character.armour + 2
     elif second_floor_choice == "2":
-        P_S(description_colour_font + "You left the building behind an continue to move towards the main street")
-        P_S("a wide avenue that in better time for sure would have been a breath taking sight")
-        P_S("the street appears to converge in what looks like the access to upwards...") 
+        P_S(
+            description_colour_font
+            + "You left the building behind an continue to move towards the main street"
+        )
+        P_S(
+            "a wide avenue that in better time for sure would have been a breath taking sight"
+        )
+        P_S(
+            "the street appears to converge in what looks like the access to upwards..."
+        )
         P_S("" + reset_font_style)
+
 
 def third_floor_action(player_character):
     """
     Third floor description
     """
-    P_S(description_colour_font + "The glittering of jewels makes you stop in your heels, the riches in this")
-    P_S("will be enough to live a life of comfort but that is not what you are here for" +  reset_font_style)
+    P_S(
+        description_colour_font
+        + "The glittering of jewels makes you stop in your heels, the riches in this"
+    )
+    P_S(
+        "will be enough to live a life of comfort but that is not what you are here for"
+        + reset_font_style
+    )
     P_S(floor_choice_colour + "What do you want to do?")
-    P_S("""
+    P_S(
+        """
         1- Enter and search
         2- That is not what I am here for!
-        """ + reset_font_style)
+        """
+        + reset_font_style
+    )
     third_floor_choice = input("")
     if third_floor_choice == "1":
         if chance_of_encounter(80) is True:
-            P_S(description_colour_font + "Your eyes can't believe the amount of diamonds, ruby and other")
+            P_S(
+                description_colour_font
+                + "Your eyes can't believe the amount of diamonds, ruby and other"
+            )
             P_S("many precious stones in the same room. You are roaming day dreaming")
             P_S("about pack your bags with as many jewels and have a good life")
             P_S("your hand is almost reaching to an exquisite crown when")
             P_S("a gurgling noise raise from the end of the shop followed by a")
             P_S("create stumbling towards you")
             P_S("" + reset_font_style)
-            P_S(combat_colour_font + "Get ready!"  + reset_font_style)
-            encounter(player_attack)
+            P_S(combat_colour_font + "Get ready!" + reset_font_style)
+            encounter(player_character)
         else:
-            P_S(description_colour_font + "Your eyes can't believe the amount of diamonds, ruby and other")
+            P_S(
+                description_colour_font
+                + "Your eyes can't believe the amount of diamonds, ruby and other"
+            )
             P_S("many precious stones in the same room. You are roaming day dreaming")
             P_S("about pack your bags with as many jewels and have a good life.")
-            P_S("Wandering the room you endup in front a display with a ring in the center")
+            P_S(
+                "Wandering the room you endup in front a display with a ring in the center"
+            )
             P_S("you can swear that the ring glows but is hard to tell you reach for")
             P_S("the ring. It feels warm and comforting in your hand. Suddenly the")
             P_S("the old and new injuries seems to hurt less..")
             P_S("" + reset_font_style)
             player_character.health_points = player_character.health_points + 1
     else:
-        P_S(description_colour_font + "You are no here for this! The final prize will make looks this like a cheap")
+        P_S(
+            description_colour_font
+            + "You are no here for this! The final prize will make looks this like a cheap"
+        )
         P_S("glass and tin copy. Steeling yourself you push forward to the stair")
-        P_S("leaving behind richeness beyong your wildest dreams") 
+        P_S("leaving behind richeness beyong your wildest dreams")
         P_S("" + reset_font_style)
+
 
 def main():
 
@@ -427,8 +514,9 @@ def main():
     Main Game function
     """
     player_character = Player()
-    print( title_colour_font +
-    """
+    print(
+        title_colour_font
+        + """
 _________          _______    _______  _______  _______   _________ _       
 \__   __/|\     /|(  ____ \  (  ____ \(  ____ \(       )  \__   __/( (    /|
    ) (   | )   ( || (    \/  | (    \/| (    \/| () () |     ) (   |  \  ( |
@@ -446,18 +534,24 @@ _________          _______   _________ _______           _______  _______
    | |   | (   ) || (           | |   | |   | || || || || (      | (\ (   
    | |   | )   ( || (____/\     | |   | (___) || () () || (____/\| ) \ \__
    )_(   |/     \|(_______/     )_(   (_______)(_______)(_______/|/   \__/    
-    """ + reset_font_style)
+    """
+        + reset_font_style
+    )
 
     while True:
-        player_character.name = input(description_colour_font + 
-            "Welcome to the tower what is your name adveturer?"
+        player_character.name = input(
+            description_colour_font
+            + "Welcome to the tower what is your name adveturer?"
         )
         if player_character.name.isalpha():
             print(f"Very well {player_character.name} you are free to enter")
             break
         else:
-            print("I am afraid do not understsand that. Can you say it again?" + reset_font_style)
-    
+            print(
+                "I am afraid do not understsand that. Can you say it again?"
+                + reset_font_style
+            )
+
     intro()
     first_floor()
     first_floor_action(player_character)
@@ -468,5 +562,5 @@ _________          _______   _________ _______           _______  _______
     final_fight(player_character)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
