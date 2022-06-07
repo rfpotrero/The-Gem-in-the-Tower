@@ -3,7 +3,8 @@ Module execute the game
 """
 import random
 from colored import fg, attr
-from functions import (P_S, intro, first_floor, second_floor,  thrid_floor, player_final_fight_victory, player_death, game_ending_description)
+from functions import (P_S, intro, first_floor, second_floor,  thrid_floor, final_fight_description,
+player_final_fight_victory, player_death, game_ending_description)
 
 
 title_colour_font = fg(69)
@@ -35,7 +36,7 @@ class Player:
         if self.max_health_points == self.health_points:
             print("You don't need to healyourself")
         else:
-            self.health_points = self.health_points + 2
+            self.health_points = self.max_health_points
             print("You healed 2 health_points")
 
     def character_attack(self, other_oponent):
@@ -67,9 +68,13 @@ def encounter(player_character):
     """
     This is used to represent the fight with a monster and advance to the next tower's level
     """
+
     new_monster = Player()
+    new_monster.armour = new_monster.armour - 2
+
     monster_alive = True
     player_alive = True
+    valid_user_input = ("1","2","3")
 
     if player_character.initiative >= new_monster.initiative:
         P_S(
@@ -87,6 +92,18 @@ def encounter(player_character):
                 """
                 + reset_font_style
             )
+            while player_action not in valid_user_input:
+                print("That is not action you can do!")
+                player_action = input(
+                combat_colour_font
+                + """Select your action:
+                1- Attack
+                2- Defend
+                3- Heal
+                """
+                + reset_font_style
+            )
+
             if player_action == "1":
                 player_character.character_attack(new_monster)
                 if new_monster.health_points == 0:
@@ -116,7 +133,8 @@ def encounter(player_character):
                 print("Reaching to your pouch you gulp down the red potion")
                 player_character.healing_up()
             else:
-                print("That is not action you can do!")
+                print("There was an error")
+                
 
             if monster_alive is True:
                 print("The monster attack!")
@@ -124,6 +142,7 @@ def encounter(player_character):
                 if player_character.health_points == 0:
                     player_alive = False
                     game_over()
+        after_combat(player_character)
 
     else:
         P_S(
@@ -157,6 +176,7 @@ def encounter(player_character):
             else:
                 print("That is not action you can do!" + reset_font_style)
         P_S("" + reset_font_style)
+        after_combat(player_character)
 
 
 def chance_of_encounter(odds_chance):
@@ -168,7 +188,7 @@ def chance_of_encounter(odds_chance):
     """
     event_outcome = random.randint(0, 10)
     probability = event_outcome * 10
-    if probability >= odds_chance:
+    if probability <= odds_chance:
         return True
 
 
@@ -189,14 +209,17 @@ def after_combat(player_character):
         P_S("The last fight are starting to hurt. You decided to stop before")
         P_S("they get worse.")
         P_S("While applying the bandages a sudden sound catch your attention..")
-        if chance_of_encounter(100) is True:
+        if chance_of_encounter(40) is True:
             P_S("A see you from the distance and start to run towards you!")
             P_S("Get ready!")
+            player_character.healing_up()
+            print(player_character.health_points)
             encounter(player_character)
         else:
             P_S("You hold your breath for a second but nothin happen")
             P_S("with the wounds bandage you resume your exploration")
             player_character.healing_up()
+            print(player_character.health_points)
     else:
         print("You need to select a valid action")
 
@@ -233,7 +256,9 @@ def final_fight(player_character):
     player_alive = True
 
     abomination = Player()
+
     final_fight_description()
+
     P_S(combat_colour_font + "The abomination moves towards you!")
     while boss_alive is True and player_alive is True:
         boss_attack = type_of_attack[random.randint(0, 2)]
@@ -277,8 +302,7 @@ def final_fight(player_character):
                 break
         elif boss_attack == "defend":
             abomination.armour = abomination.armour + 2
-            abomination.attack = abomination.attack - 2
-            print("The abomination defend himself")
+            print("The abomination defend itself")
             player_character.character_attack(abomination)
             if abomination.health_points == 0:
                 boss_alive = False
@@ -341,7 +365,7 @@ def first_floor_action(player_character):
     P_S("2- Continue climbin the tower")
     first_floor_choice = input("" + reset_font_style)
     if first_floor_choice == "1":
-        if chance_of_encounter(80) is True:
+        if chance_of_encounter(50) is True:
             P_S(
                 description_colour_font
                 + "While searching for anything of value the sound"
@@ -408,7 +432,7 @@ def second_floor_action(player_character):
         + reset_font_style
     )
     if second_floor_choice == "1":
-        if chance_of_encounter(80) is True:
+        if chance_of_encounter(50) is True:
             P_S(
                 description_colour_font + "The makeshift torch hold the darkness at bay"
             )
@@ -470,7 +494,7 @@ def third_floor_action(player_character):
     )
     third_floor_choice = input("")
     if third_floor_choice == "1":
-        if chance_of_encounter(80) is True:
+        if chance_of_encounter(50) is True:
             P_S(
                 description_colour_font
                 + "Your eyes can't believe the amount of diamonds, ruby and other"
@@ -514,6 +538,10 @@ def main():
     Main Game function
     """
     player_character = Player()
+    player_character.max_health_points = 3
+    player_character.health_points = 3
+    
+
     print(
         title_colour_font
         + """
@@ -560,6 +588,7 @@ _________          _______   _________ _______           _______  _______
     thrid_floor()
     third_floor_action(player_character)
     final_fight(player_character)
+
 
 
 if __name__ == "__main__":
