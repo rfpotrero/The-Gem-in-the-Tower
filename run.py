@@ -33,18 +33,18 @@ class Player:
         else:
             self.health_points = self.health_points + 2
             print("You healed 2 health_points")
-    def player_attack(self, other_oponent):
+    def character_attack(self, other_oponent):
         """
         Fuction used to calculate if an injuried is inflicted
         """
-        player_attack_roll = attack_roll(self.attack)
-        if player_attack_roll >= other_oponent.armour:
+        character_attack_roll = attack_roll(self.attack)
+        if character_attack_roll >= other_oponent.armour:
             print("The attack was successful!")
-            print(player_attack_roll)
+            print(character_attack_roll)
             other_oponent.health_points = other_oponent.health_points - 1
         else:
             print("The player failed")
-            print(player_attack_roll)
+            print(character_attack_roll)
 
 def attack_roll(number_of_dices):
     """
