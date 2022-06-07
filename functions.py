@@ -1,5 +1,10 @@
+"""
+This module contais the floor descriptions
+and the function to display 1 line at a time.
+"""
+
 import time
-from colored import fg, bg, attr
+from colored import fg, attr
 
 title_colour_font = fg(69)
 description_colour_font = fg(191)
@@ -18,7 +23,7 @@ def P_S(text):
     I have slightly change the function to hardcoding the time parameters.
     """
     print(text)
-    time.sleep(0.1)
+    time.sleep(0.5)
 
 
 def intro():
@@ -130,8 +135,14 @@ def game_ending_description():
         description_colour_font
         + "The gem shines in front of you. The legends were right!"
     )
-    P_S("This can buy entire kingdoms")
-
+    P_S("The facets reflect the light in impossibles shapes")
+    P_S("With this you could buy entire kingdoms. The gem is light and strangely")
+    P_S("warm in your palm. Putting inside your velvet pouch you are are ready to leave")
+    P_S("this horrible place.")
+    P_S("Nothing botheres you on the way down, all seem strangely calm but you")
+    P_S("breath once outside the walls and under the open skies")
+    P_S("The walk to you ship will be a long one but you are optimistic")
+    P_S("" + reset_font_style)
 
 def player_death():
     """
