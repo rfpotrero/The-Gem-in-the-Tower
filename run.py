@@ -349,7 +349,8 @@ def first_floor_action(player_character):
     """
     P_S(description_colour_font + "Dust cover everything in the halls, market stall appear abandod")
     P_S("As if they all left in a rush")
-    P_S("The halls might have something of value but be careful" + reset_font_style)
+    P_S("The halls might have something of value")
+    P_S("" + reset_font_style)
     P_S(floor_choice_colour+"What do you want to do?")
     P_S("1- Search and Prepare")
     P_S("2- Continue climbin the tower")
@@ -365,15 +366,16 @@ def first_floor_action(player_character):
             P_S(description_colour_font + "You were ready to give up and complaint about wasting time")
             P_S("While a bright blade caught your eye a quick cleaning")
             P_S("Reveals an extraordinary weapon that will surely help")
-            P_S("on what you will facing ahead." + reset_font_style)
+            P_S("on what you will facing ahead.")
+            P_S("" + reset_font_style)
             player_character.attack = player_character.attack + 2
     elif first_floor_choice == "2":
         if chance_of_encounter(50) is True:
             P_S( description_colour_font + "Moving forward you spot what looks like the stairs to")
             P_S("The next level. You are almost at the start of the stairs")
             P_S("When the clash and metal and stone draw you attention")
-            P_S("A lonely creature is approaching...")
-            P_S("Get ready!" + reset_font_style)
+            P_S("A lonely creature is approaching..." + reset_font_style)
+            P_S(combat_colour_font + "Get ready!" + reset_font_style)
             encounter(player_character)
         else:
             P_S(description_colour_font + "Moving forward you spot what looks like the stairs to")
@@ -391,9 +393,9 @@ def second_floor_action(player_character):
     P_S("It is massive building the big forges now dark and dead but")
     P_S("you can easily imagine how busy this building and the sound of hammering")
     P_S("There might be some items left behind inside the massive building")
-    P_S("it will make you take a detour and add a few hours...would it be worhty?" + reset_font_style)
+    P_S("it will make you take a detour and add a few hours...would it be worhty?")
+    P_S("" + reset_font_style)
     P_S(floor_choice_colour + "What you would?")
-    P_S("")
     second_floor_choice = input("""
     1- Enter the forge
     2- Whatever is there is not worthy
@@ -416,7 +418,8 @@ def second_floor_action(player_character):
             P_S("a quite laugh escape your lips. What looked like enemies is a row")
             P_S("of armour stands..getting closer this marvelous craft still is usable")
             P_S("You spot a shield the surface smooth and dusty but the straps are sturdy")
-            P_S("and the metal strong. You take it with you, any help is welcome here" + reset_font_style)
+            P_S("and the metal strong. You take it with you, any help is welcome here") 
+            P_S("" + reset_font_style)
             player_character.armour = player_character.armour + 2
     elif second_floor_choice == "2":
         P_S(description_colour_font + "You left the building behind an continue to move towards the main street")
@@ -452,12 +455,14 @@ def third_floor_action(player_character):
             P_S("Wandering the room you endup in front a display with a ring in the center")
             P_S("you can swear that the ring glows but is hard to tell you reach for")
             P_S("the ring. It feels warm and comforting in your hand. Suddenly the")
-            P_S("the old and new injuries seems to hurt less.." + reset_font_style)
+            P_S("the old and new injuries seems to hurt less..")
+            P_S("" + reset_font_style)
             player_character.hp = player_character.hp + 1
     else:
         P_S(description_colour_font + "You are no here for this! The final prize will make looks this like a cheap")
         P_S("glass and tin copy. Steeling yourself you push forward to the stair")
-        P_S("leaving behind richeness beyong your wildest dreams" + reset_font_style)
+        P_S("leaving behind richeness beyong your wildest dreams") 
+        P_S("" + reset_font_style)
 
 def main():
 
