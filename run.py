@@ -45,11 +45,11 @@ class Player:
         """
         character_attack_roll = attack_roll(self.attack)
         if character_attack_roll >= other_oponent.armour:
-            print(combat_colour_font + "The attack was successful!" + character_attack_roll
+            print(combat_colour_font + f"The attack was successful! {character_attack_roll}"
             + reset_font_style)
             other_oponent.health_points = other_oponent.health_points - 1
         else:
-            print(combat_colour_font + "The attack failed" + character_attack_roll
+            print(combat_colour_font + f"The attack failed {character_attack_roll}"
             + reset_font_style)
 
 
