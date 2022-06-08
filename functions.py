@@ -148,7 +148,7 @@ def player_death():
     """
     This functions gives a brief description when the player health_point reach zero
     """
-    P_S(description_colour_font + 
+    P_S(description_colour_font +
         "The last thing you see is a blow passing your defense. You almost felt no pain"
     )
     P_S("with darkness engulfing you. The monster stand before you baring their fangs")
