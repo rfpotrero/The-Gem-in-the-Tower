@@ -112,6 +112,7 @@ def encounter(player_character):
                     + "With a swift strike the monster falls blood spurting"
                     + reset_font_style
                 )
+                after_combat(player_character)
                 break
             P_S( combat_colour_font + "The monster attacks!"
             + reset_font_style)
@@ -133,6 +134,7 @@ def encounter(player_character):
                     + "With a swift strike the monster falls blood spurting"
                     + reset_font_style
                 )
+                after_combat(player_character)
                 break
             P_S( combat_colour_font + "The monster attacks!"
             + reset_font_style)
@@ -170,33 +172,33 @@ def after_combat(player_character):
     """
     This fuction provides information about of the combat.
     """
-    P_S("The fight is over while your heartbeat still pound hard in your chest")
+    P_S(floor_choice_colour + "The fight is over, your heartbeat still pound hard in your chest")
     P_S("you stop for a moment to consider your next move.")
     P_S("1- Continue moving ahead")
     P_S("2- Stop and healing")
-    after_combat_choice = input("What you would do?")
+    after_combat_choice = input("What you would do?" + reset_font_style)
     if after_combat_choice == "1":
-        P_S("Not wasting any time you decided to move forward")
-        P_S("The path to the next floors seems clear")
+        P_S(description_colour_font + "Not wasting any time you decided to move forward")
+        P_S("The path to the next floors seems clear" + reset_font_style)
     elif after_combat_choice == "2":
-        P_S("The adrenaline is fading away and the injuries from the last")
+        P_S(description_colour_font +  "The adrenaline is fading and the injuries from the last")
         P_S("The last fight are starting to hurt. You decided to stop before")
         P_S("they get worse.")
-        P_S("While applying the bandages a sudden sound catch your attention..")
+        P_S("While applying the bandages a sudden sound catch your attention.." + reset_font_style)
         if chance_of_encounter(40) is True:
-            P_S("A see you from the distance and start to run towards you!")
-            P_S("Get ready!")
+            P_S(description_colour_font + "A monster starts to run towards you!"
+            + reset_font_style)
+            P_S(combat_colour_font + "Get ready!" + reset_font_style)
             player_character.healing_up()
             print(player_character.health_points)
             encounter(player_character)
         else:
-            P_S("You hold your breath for a second but nothin happen")
-            P_S("with the wounds bandage you resume your exploration")
+            P_S(description_colour_font + "You hold your breath for a second but nothin happen")
+            P_S("with the wounds bandage you resume your exploration" + reset_font_style)
             player_character.healing_up()
             print(player_character.health_points)
     else:
         print("You need to select a valid action")
-
 
 def game_over():
     """
@@ -236,7 +238,7 @@ def final_fight(player_character):
     P_S(combat_colour_font + "The abomination moves towards you!")
     while boss_alive is True and player_alive is True:
         boss_attack = type_of_attack[random.randint(0, 2)]
-        P_S(
+        P_S( combat_colour_font + 
             f"The abomination is preparing a {boss_attack} you what are you going to do!"
         )
         player_choice = input(
@@ -245,10 +247,11 @@ def final_fight(player_character):
         2- Defend
         3- heal
         """
-        )
+        + reset_font_style)
         if boss_attack == "powerful attack" and player_choice == "1":
             abomination.armour = abomination.armour - 2
-            P_S("Moving before the abomination could delivery the blow you attack!")
+            P_S(combat_colour_font + "Moving before the abomination could delivery the blow you attack!"
+            + reset_font_style)
             player_character.character_attack(abomination)
             if abomination.health_points == 0:
                 boss_alive = False
@@ -261,7 +264,8 @@ def final_fight(player_character):
                 player_death()
                 break
         elif boss_attack == "fast attack" and player_choice == "2":
-            print("You shield raised in a perfect block")
+            P_S(combat_colour_font + "You shield raised in a perfect block"
+            + reset_font_style)
             abomination.attack = abomination.attack - 1
             abomination.character_attack(player_character)
             if player_character.health_points == 0:
@@ -276,7 +280,8 @@ def final_fight(player_character):
                 break
         elif boss_attack == "defend":
             abomination.armour = abomination.armour + 2
-            print("The abomination defend itself")
+            P_S(combat_colour_font + "The abomination defend itself"
+            + reset_font_style)
             player_character.character_attack(abomination)
             if abomination.health_points == 0:
                 boss_alive = False
