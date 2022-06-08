@@ -20,12 +20,10 @@ class Player:
     """
 
     def __init__(self):
-        health_points = random.randint(1, 3)
-        initiative = random.randint(1, 6)
+        health_points = random.randint(2, 3)
         self.health_points = health_points
         self.max_health_points = health_points
         self.attack = 3
-        self.initiative = initiative
         self.armour = 12
         self.name = ""
 
@@ -52,7 +50,6 @@ class Player:
             print(combat_colour_font + f"The attack failed {character_attack_roll}"
             + reset_font_style)
 
-
 def attack_roll(number_of_dices):
     """
     This is used to generate the rolls for attacks.
@@ -62,7 +59,6 @@ def attack_roll(number_of_dices):
         roll = random.randint(1, 6)
         attack_roll_result += roll
     return attack_roll_result
-
 
 def encounter(player_character):
     """
@@ -155,6 +151,21 @@ def encounter(player_character):
         else:
             print("There was an error")
 
+def player_alive_check(player_character):
+    """
+    Check if the player is still above zero health points after a monster attack
+    """
+    if player_character.health_points == 0: 
+        player_death()
+        game_over()
+
+def final_boss_alive_check(abomination):
+    """
+    Check if the final boss is still above zero health points after a player's attack
+    """
+    if abomination.health_points == 0:
+        player_final_fight_victory()
+
 def chance_of_encounter(odds_chance):
     """
     This will calculate the chance of encounter while
@@ -166,7 +177,6 @@ def chance_of_encounter(odds_chance):
     probability = event_outcome * 10
     if probability <= odds_chance:
         return True
-
 
 def after_combat(player_character):
     """
@@ -186,7 +196,7 @@ def after_combat(player_character):
         P_S("they get worse.")
         P_S("While applying the bandages a sudden sound catch your attention.." + reset_font_style)
         if chance_of_encounter(40) is True:
-            P_S(description_colour_font + "A monster starts to run towards you!"
+            P_S(description_colour_font + "A monster startsg to run towards you!"
             + reset_font_style)
             P_S(combat_colour_font + "Get ready!" + reset_font_style)
             player_character.healing_up()
@@ -206,21 +216,20 @@ def game_over():
     reach zero and will ask the player if they want to play again.
     """
     player_death()
-    P_S("The game is over")
+    P_S(description_colour_font + "You have died.")
     P_S("Do you have to play again?")
     game_over_option = input(
         """
     1- Play again
     2- Quit
     """
-    )
+    + reset_font_style)
     if game_over_option == "1":
         main()
     elif game_over_option == "2":
         exit()
     else:
         print("Please select a valid option")
-
 
 def final_fight(player_character):
     """
@@ -238,7 +247,7 @@ def final_fight(player_character):
     P_S(combat_colour_font + "The abomination moves towards you!")
     while boss_alive is True and player_alive is True:
         boss_attack = type_of_attack[random.randint(0, 2)]
-        P_S( combat_colour_font + 
+        P_S( combat_colour_font +
             f"The abomination is preparing a {boss_attack} you what are you going to do!"
         )
         player_choice = input(
@@ -250,48 +259,30 @@ def final_fight(player_character):
         + reset_font_style)
         if boss_attack == "powerful attack" and player_choice == "1":
             abomination.armour = abomination.armour - 2
-            P_S(combat_colour_font + "Moving before the abomination could delivery the blow you attack!"
+            P_S(combat_colour_font + "Moving before the abomination you attack!"
             + reset_font_style)
             player_character.character_attack(abomination)
-            if abomination.health_points == 0:
-                boss_alive = False
-                player_final_fight_victory()
-                break
+            final_boss_alive_check(abomination)
             abomination.character_attack(player_character)
             abomination.armour = abomination.armour + 2
-            if player_character.health_points == 0:
-                player_alive = False
-                player_death()
-                break
+            player_alive_check(player_character)
         elif boss_attack == "fast attack" and player_choice == "2":
             P_S(combat_colour_font + "You shield raised in a perfect block"
             + reset_font_style)
             abomination.attack = abomination.attack - 1
             abomination.character_attack(player_character)
-            if player_character.health_points == 0:
-                player_alive = False
-                player_death()
-                break
+            player_alive_check(player_character)
             abomination.attack = abomination.attack + 1
             player_character.character_attack(abomination)
-            if abomination.health_points == 0:
-                boss_alive = False
-                player_final_fight_victory()
-                break
+            final_boss_alive_check(abomination)
         elif boss_attack == "defend":
             abomination.armour = abomination.armour + 2
             P_S(combat_colour_font + "The abomination defend itself"
             + reset_font_style)
             player_character.character_attack(abomination)
-            if abomination.health_points == 0:
-                boss_alive = False
-                player_final_fight_victory()
-                break
+            final_boss_alive_check(abomination)
             abomination.character_attack(player_character)
-            if player_character.health_points == 0:
-                player_alive = False
-                player_death()
-                break
+            player_alive_check(player_character)
             abomination.armour = abomination.armour - 2
             abomination.attack = abomination.attack + 2
 
@@ -299,27 +290,15 @@ def final_fight(player_character):
             if boss_attack == "powerful_attack":
                 abomination.attack = abomination.attack + 2
                 player_character.character_attack(abomination)
-                if abomination.health_points == 0:
-                    boss_alive = False
-                    player_final_fight_victory()
-                    break
+                final_boss_alive_check(abomination)
                 abomination.character_attack(player_character)
-                if player_character.health_points == 0:
-                    player_alive = False
-                    player_death()
-                    break
+                player_alive_check(player_character)
                 abomination.attack = abomination.attack - 2
             if boss_attack == "fast_attack":
                 abomination.character_attack(player_character)
-                if player_character.health_points == 0:
-                    player_alive = False
-                    player_death()
-                    break
+                player_alive_check(player_character)
                 player_character.character_attack(abomination)
-                if abomination.health_points == 0:
-                    boss_alive = False
-                    player_final_fight_victory()
-                    break
+                final_boss_alive_check(abomination)
     P_S("" + reset_font_style)
 
 
