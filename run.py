@@ -34,10 +34,10 @@ class Player:
         Method to calculate healing
         """
         if self.max_health_points == self.health_points:
-            print("You don't need to healyourself")
+            print(combat_colour_font + "You don't need to healyourself" + reset_font_style)
         else:
             self.health_points = self.max_health_points
-            print("You healed 2 health_points")
+            print(combat_colour_font + "The potion heals your wounds!" + reset_font_style)
 
     def character_attack(self, other_oponent):
         """
@@ -120,7 +120,9 @@ def encounter(player_character):
                 player_alive = False
                 game_over()
         elif player_action == "2":
-            P_S("You focus on avoiding or blocking attacks, riposting when the chance appears")
+            P_S(combat_colour_font +
+            "You focus on avoiding or blocking attacks, riposting when the chance appears"
+            + reset_font_style)
             player_character.armour = player_character.armour + 2
             player_character.attack = player_character.attack - 1
             player_character.character_attack(new_monster)
@@ -141,7 +143,8 @@ def encounter(player_character):
             player_character.armour = player_character.armour - 2
             player_character.attack = player_character.attack + 1
         elif player_action == "3":
-            P_S("Reaching to your pouch you gulp down the red potion")
+            P_S(combat_colour_font + "Reaching to your pouch you gulp down the red potion"
+            + reset_font_style)
             player_character.healing_up()
             new_monster.character_attack(player_character)
             if player_character.health_points == 0:
