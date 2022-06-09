@@ -407,7 +407,7 @@ def first_floor_action(player_character):
         P_S("1- Search and Prepare")
         P_S("2- Continue climbin the tower")
         first_floor_choice = input("" + reset_font_style)
-        if first_floor_choice == "1" or first_floor_choice == "2":
+        if first_floor_choice in ("1","2"):
             if first_floor_choice == "1":
                 if chance_of_encounter(50) is True:
                     P_S(
@@ -487,7 +487,7 @@ def second_floor_action(player_character):
         """
             + reset_font_style
         )
-        if second_floor_choice == "1" or second_floor_choice == "2":
+        if second_floor_choice in ("1","2"):
             if second_floor_choice == "1":
                 if chance_of_encounter(50) is True:
                     P_S(
@@ -563,7 +563,7 @@ def third_floor_action(player_character):
             + reset_font_style
         )
         third_floor_choice = input("")
-        if third_floor_choice == "1" or third_floor_choice == "2":
+        if third_floor_choice in ("1","2"):
             if third_floor_choice == "1":
                 if chance_of_encounter(50) is True:
                     P_S(
