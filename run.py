@@ -51,6 +51,13 @@ class Player:
 def attack_roll(number_of_dices):
     """
     This is used to generate the rolls for attacks.
+
+    Args:
+        number_of_dices(int): This is the number of dices that a character will use
+        to attack.
+
+    Returns:
+        attack_roll_result(int): This is the sum of the number of dices
     """
     attack_roll_result = 0
     for dice in range(number_of_dices):
@@ -61,6 +68,9 @@ def attack_roll(number_of_dices):
 def encounter(player_character):
     """
     This is used to represent the fight with a monster and advance to the next tower's level
+
+    Args:
+        player_character (Class): This is the player character class generated in main()
     """
 
     new_monster = Player()
@@ -135,6 +145,9 @@ def encounter(player_character):
 def player_alive_check(player_character):
     """
     Check if the player is still above zero health points after a monster attack
+
+    Args:
+        player_character (Class): This is the player character class generated in main()
     """
     if player_character.health_points == 0:
         player_death()
@@ -143,6 +156,9 @@ def player_alive_check(player_character):
 def final_boss_alive_check(abomination):
     """
     Check if the final boss is still above zero health points after a player's attack
+
+    Args:
+        abomination (Class): This is generated in final_fight() and the represent the last boss
     """
     if abomination.health_points == 0:
         player_final_fight_victory()
@@ -154,6 +170,11 @@ def chance_of_encounter(odds_chance):
     the player search_floor or rest
     Credits to Daniel Poston for the main code
     https://www.datacamp.com/tutorial/statistics-python-tutorial-probability-1
+
+    Args:
+        odds_chance (int): This represent the chance of an action to success
+    Returns:
+        odds_chance (bool): Returns true if the actions is a success
     """
     event_outcome = random.randint(0, 10)
     probability = event_outcome * 10
@@ -163,6 +184,9 @@ def chance_of_encounter(odds_chance):
 def after_combat(player_character):
     """
     This function provides information about of the combat.
+
+    Args:
+        player_character (Class): This is the player character class generated in main()
     """
     P_S(floor_choice_colour + "The fight is over, your heartbeat still pound hard in your chest")
     P_S("you stop for a moment to consider your next move.")
@@ -202,6 +226,7 @@ def after_combat(player_character):
 def play_again():
     """
     Presents the user with the option to play again.
+
     """
     while True:
         P_S( description_colour_font + "Do you want to play again?")
@@ -228,7 +253,10 @@ def game_over():
 
 def final_fight(player_character):
     """
-    This will play the final boss fight
+    This generates the final boss fight. 
+
+    Args:
+        player_character (Class): This is the player character class generated in main()
     """
     type_of_attack = ("powerful attack", "fast attack", "defend")
 
@@ -365,7 +393,12 @@ def first_floor_action(player_character):
 
 def second_floor_action(player_character):
     """
-    Second floor actions description and result.
+    Third floor action description. This present the player with a choice of continue exploring
+    risking an encounter or keep moving forward.
+
+    Args:
+        player_character (Class): This is the instance created in the main function.
+        It is the player and will be persistent until the end of the game.
     """
     P_S(
         description_colour_font
@@ -426,7 +459,12 @@ def second_floor_action(player_character):
 
 def third_floor_action(player_character):
     """
-    Third floor description
+    Third floor action description. This present the player with a choice of continue exploring
+    risking an encounter or keep moving forward.
+
+    Args:
+        player_character (Class): This is the instance created in the main function.
+        It is the player and will be persistent until the end of the game.
     """
     P_S(
         description_colour_font
