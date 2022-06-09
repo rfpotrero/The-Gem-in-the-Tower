@@ -6,13 +6,11 @@ from colored import fg, attr
 from functions import (P_S, intro, first_floor, second_floor,  thrid_floor, final_fight_description,
 player_final_fight_victory, player_death, game_ending_description)
 
-
 title_colour_font = fg(69)
 description_colour_font = fg(191)
 floor_choice_colour = fg(214)
 combat_colour_font = fg(124)
 reset_font_style = attr(0)
-
 
 class Player:
     """
@@ -533,13 +531,13 @@ _________          _______   _________ _______           _______  _______
                 + reset_font_style
             )
 
-    # intro()
-    # first_floor()
-    # first_floor_action(player_character)
-    # second_floor()
-    # second_floor_action(player_character)
-    # thrid_floor()
-    # third_floor_action(player_character)
+    intro()
+    first_floor()
+    first_floor_action(player_character)
+    second_floor()
+    second_floor_action(player_character)
+    thrid_floor()
+    third_floor_action(player_character)
     final_fight(player_character)
     play_again()
 
