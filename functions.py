@@ -1,5 +1,10 @@
+"""
+This module contais the floor descriptions
+and the function to display 1 line at a time.
+"""
+
 import time
-from colored import fg, bg, attr
+from colored import fg, attr
 
 title_colour_font = fg(69)
 description_colour_font = fg(191)
@@ -16,9 +21,11 @@ def P_S(text):
 
     Credits to Deanna Carina https://github.com/DeannaCarina/StarTrekTimeLoop/blob/main/functions.py
     I have slightly change the function to hardcoding the time parameters.
+    Args: 
+        text (string): This is the string that will be displaying line by line.
     """
     print(text)
-    time.sleep(0.1)
+    time.sleep(0.7)
 
 
 def intro():
@@ -70,6 +77,7 @@ def thrid_floor():
     """
     This display the third floor description.
     """
+    P_S("")
     P_S(
         description_colour_font
         + "The climbs ends up in a patio that even if it has seen better day"
@@ -117,10 +125,11 @@ def player_final_fight_victory():
     P_S("wanted to tear your apart are finally resting. You shudder at the destiny of")
     P_S("the dwellers of the city. Such a horrible fate.")
     P_S(
-        "turning to the last steps you can see the glitter gem finally at reach!"
+        "Turning to the last steps you can see the gem finally at reach!"
         + reset_font_style
     )
-
+    P_S("")
+    game_ending_description()
 
 def game_ending_description():
     """
@@ -128,17 +137,22 @@ def game_ending_description():
     """
     P_S(
         description_colour_font
-        + "The gem shines in front of you. The legends were right!"
-    )
-    P_S("This can buy entire kingdoms")
-
+        + "The gem shines in front of you. The legends were right!")
+    P_S("The facets reflect the light in impossibles shapes")
+    P_S("With this you could buy entire kingdoms. The gem is light and strangely")
+    P_S("warm in your palm. Putting inside your velvet pouch you are are ready to leave")
+    P_S("this horrible place.")
+    P_S("Nothing botheres you on the way down, all seem strangely calm but you")
+    P_S("breath once outside the walls and under the open skies")
+    P_S("The walk to you ship will be a long one but you are optimistic")
+    P_S("" + reset_font_style)
 
 def player_death():
     """
     This functions gives a brief description when the player health_point reach zero
     """
-    P_S(
+    P_S(description_colour_font +
         "The last thing you see is a blow passing your defense. You almost felt no pain"
     )
     P_S("with darkness engulfing you. The monster stand before you baring their fangs")
-    P_S(".....")
+    P_S("....." + reset_font_style)
