@@ -21,6 +21,8 @@ def P_S(text):
 
     Credits to Deanna Carina https://github.com/DeannaCarina/StarTrekTimeLoop/blob/main/functions.py
     I have slightly change the function to hardcoding the time parameters.
+    Args: 
+        text (string): This is the string that will be displaying line by line.
     """
     print(text)
     time.sleep(0.7)
@@ -75,6 +77,7 @@ def thrid_floor():
     """
     This display the third floor description.
     """
+    P_S("")
     P_S(
         description_colour_font
         + "The climbs ends up in a patio that even if it has seen better day"
