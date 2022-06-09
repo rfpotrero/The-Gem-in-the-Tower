@@ -553,53 +553,62 @@ def third_floor_action(player_character):
         "will be enough to live a life of comfort but that is not what you are here for"
         + reset_font_style
     )
-    P_S(floor_choice_colour + "What do you want to do?")
-    P_S(
-        """
-        1- Enter and search
-        2- That is not what I am here for!
-        """
-        + reset_font_style
-    )
-    third_floor_choice = input("")
-    if third_floor_choice == "1":
-        if chance_of_encounter(50) is True:
-            P_S(
-                description_colour_font
-                + "Your eyes can't believe the amount of diamonds, ruby and other"
-            )
-            P_S("many precious stones in the same room. You are roaming day dreaming")
-            P_S("about pack your bags with as many jewels and have a good life")
-            P_S("your hand is almost reaching to an exquisite crown when")
-            P_S("a gurgling noise raise from the end of the shop followed by a")
-            P_S("create stumbling towards you")
-            P_S("" + reset_font_style)
-            P_S(combat_colour_font + "Get ready!" + reset_font_style)
-            encounter(player_character)
+    while True:
+        P_S(floor_choice_colour + "What do you want to do?")
+        P_S(
+            """
+            1- Enter and search
+            2- That is not what I am here for!
+            """
+            + reset_font_style
+        )
+        third_floor_choice = input("")
+        if third_floor_choice == "1" or third_floor_choice == "2":
+            if third_floor_choice == "1":
+                if chance_of_encounter(50) is True:
+                    P_S(
+                        description_colour_font
+                        + "Your eyes can't believe the amount of diamonds, ruby and other"
+                    )
+                    P_S("many precious stones in the same room. You are roaming day dreaming")
+                    P_S("about pack your bags with as many jewels and have a good life")
+                    P_S("your hand is almost reaching to an exquisite crown when")
+                    P_S("a gurgling noise raise from the end of the shop followed by a")
+                    P_S("create stumbling towards you")
+                    P_S("" + reset_font_style)
+                    P_S(combat_colour_font + "Get ready!" + reset_font_style)
+                    encounter(player_character)
+                else:
+                    P_S(
+                        description_colour_font
+                        + "Your eyes can't believe the amount of diamonds, ruby and other"
+                    )
+                    P_S("many precious stones in the same room. You are roaming day dreaming")
+                    P_S("about pack your bags with as many jewels and have a good life.")
+                    P_S(
+                        "Wandering the room you endup in front a display with a ring in the center"
+                    )
+                    P_S("you can swear that the ring glows but is hard to tell you reach for")
+                    P_S("the ring. It feels warm and comforting in your hand. Suddenly the")
+                    P_S("the old and new injuries seems to hurt less..")
+                    P_S("" + reset_font_style)
+                    player_character.health_points = player_character.health_points + 1
+            else:
+                P_S(
+                    description_colour_font
+                    + "You are no here for this! The final prize will make looks this like a cheap"
+                )
+                P_S("glass and tin copy. Steeling yourself you push forward to the stair")
+                P_S("leaving behind richeness beyong your wildest dreams")
+                P_S("" + reset_font_style)
+            break
         else:
             P_S(
-                description_colour_font
-                + "Your eyes can't believe the amount of diamonds, ruby and other"
-            )
-            P_S("many precious stones in the same room. You are roaming day dreaming")
-            P_S("about pack your bags with as many jewels and have a good life.")
-            P_S(
-                "Wandering the room you endup in front a display with a ring in the center"
-            )
-            P_S("you can swear that the ring glows but is hard to tell you reach for")
-            P_S("the ring. It feels warm and comforting in your hand. Suddenly the")
-            P_S("the old and new injuries seems to hurt less..")
-            P_S("" + reset_font_style)
-            player_character.health_points = player_character.health_points + 1
-    else:
-        P_S(
-            description_colour_font
-            + "You are no here for this! The final prize will make looks this like a cheap"
-        )
-        P_S("glass and tin copy. Steeling yourself you push forward to the stair")
-        P_S("leaving behind richeness beyong your wildest dreams")
-        P_S("" + reset_font_style)
-
+                    description_colour_font
+                    + "You need to select a valid option"
+                    + reset_font_style
+                )
+            continue
 
 def main():
 
@@ -657,7 +666,6 @@ _________          _______   _________ _______           _______  _______
     third_floor_action(player_character)
     final_fight(player_character)
     play_again()
-
 
 if __name__ == "__main__":
     main()
