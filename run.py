@@ -176,7 +176,7 @@ def after_combat(player_character):
         P_S("The path to the next floor seems clear" + reset_font_style)
     elif after_combat_choice == "2":
         while player_character.max_health_points > player_character.health_points:
-            P_S(description_colour_font +  
+            P_S(description_colour_font +
             "The adrenaline is fading and the injuries from the last")
             P_S("The last fight are starting to hurt. You decided to stop before")
             P_S("they get worse.")
@@ -251,7 +251,7 @@ def final_fight(player_character):
             """
         1- Attack
         2- Defend
-        3- heal
+        3- Heal
         """
         + reset_font_style)
         if boss_attack == "powerful attack" and player_choice == "1":
@@ -282,16 +282,18 @@ def final_fight(player_character):
             player_alive_check(player_character)
             abomination.armour = abomination.armour - 2
             abomination.attack = abomination.attack + 2
-
+        elif player_choice == "3":
+            abomination.character_attack(player_character)
+            player_character.healing_up()
         else:
-            if boss_attack == "powerful_attack":
+            if boss_attack == "powerful attack":
                 abomination.attack = abomination.attack + 2
                 player_character.character_attack(abomination)
                 final_boss_alive_check(abomination)
                 abomination.character_attack(player_character)
                 player_alive_check(player_character)
                 abomination.attack = abomination.attack - 2
-            if boss_attack == "fast_attack":
+            if boss_attack == "fast attack":
                 abomination.character_attack(player_character)
                 player_alive_check(player_character)
                 player_character.character_attack(abomination)
@@ -531,18 +533,15 @@ _________          _______   _________ _______           _______  _______
                 + reset_font_style
             )
 
-    intro()
-    first_floor()
-    first_floor_action(player_character)
-    second_floor()
-    second_floor_action(player_character)
-    thrid_floor()
-    third_floor_action(player_character)
+    # intro()
+    # first_floor()
+    # first_floor_action(player_character)
+    # second_floor()
+    # second_floor_action(player_character)
+    # thrid_floor()
+    # third_floor_action(player_character)
     final_fight(player_character)
     play_again()
-
-
-
 
 if __name__ == "__main__":
     main()
