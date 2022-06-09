@@ -342,54 +342,59 @@ def first_floor_action(player_character):
     P_S("As if they all left in a rush")
     P_S("The halls might have something of value")
     P_S("" + reset_font_style)
-    P_S(floor_choice_colour + "What do you want to do?")
-    P_S("1- Search and Prepare")
-    P_S("2- Continue climbin the tower")
-    first_floor_choice = input("" + reset_font_style)
-    if first_floor_choice == "1":
-        if chance_of_encounter(50) is True:
-            P_S(
-                description_colour_font
-                + "While searching for anything of value the sound"
-            )
-            P_S("a sudden cry pierced the silence and you turn just in")
-            P_S("to see a strange creature charging!" + reset_font_style)
-            P_S(combat_colour_font + "Get ready!" + reset_font_style)
-            encounter(player_character)
+    while True:
+        P_S(floor_choice_colour + "What do you want to do?")
+        P_S("1- Search and Prepare")
+        P_S("2- Continue climbin the tower")
+        first_floor_choice = input("" + reset_font_style)
+        if first_floor_choice == "1" or first_floor_choice == "2":       
+            if first_floor_choice == "1":
+                if chance_of_encounter(50) is True:
+                    P_S(
+                        description_colour_font
+                        + "While searching for anything of value the sound"
+                    )
+                    P_S("a sudden cry pierced the silence and you turn just in")
+                    P_S("to see a strange creature charging!" + reset_font_style)
+                    P_S(combat_colour_font + "Get ready!" + reset_font_style)
+                    encounter(player_character)
+                else:
+                    P_S(
+                        description_colour_font
+                        + "You were ready to give up and complaint about wasting time"
+                    )
+                    P_S("While a bright blade caught your eye a quick cleaning")
+                    P_S("Reveals an extraordinary weapon that will surely help")
+                    P_S("on what you will facing ahead.")
+                    P_S("" + reset_font_style)
+                    player_character.attack = player_character.attack + 2
+            elif first_floor_choice == "2":
+                if chance_of_encounter(50) is True:
+                    P_S(
+                        description_colour_font
+                        + "Moving forward you spot what looks like the stairs to"
+                    )
+                    P_S("The next level. You are almost at the start of the stairs")
+                    P_S("When the clash and metal and stone draw you attention")
+                    P_S("A lonely creature is approaching..." + reset_font_style)
+                    P_S(combat_colour_font + "Get ready!" + reset_font_style)
+                    encounter(player_character)
+                else:
+                    P_S(
+                        description_colour_font
+                        + "Moving forward you spot what looks like the stairs to"
+                    )
+                    P_S("The next level. You are almost at the start of the stairs")
+                    P_S("Climbing the startirs is easy, the worn stone under your feet")
+                    P_S(
+
+                    "Is smooth. While walking you wondered what happened here.."
+                    + reset_font_style
+                )
+            break
         else:
-            P_S(
-                description_colour_font
-                + "You were ready to give up and complaint about wasting time"
-            )
-            P_S("While a bright blade caught your eye a quick cleaning")
-            P_S("Reveals an extraordinary weapon that will surely help")
-            P_S("on what you will facing ahead.")
-            P_S("" + reset_font_style)
-            player_character.attack = player_character.attack + 2
-    elif first_floor_choice == "2":
-        if chance_of_encounter(50) is True:
-            P_S(
-                description_colour_font
-                + "Moving forward you spot what looks like the stairs to"
-            )
-            P_S("The next level. You are almost at the start of the stairs")
-            P_S("When the clash and metal and stone draw you attention")
-            P_S("A lonely creature is approaching..." + reset_font_style)
-            P_S(combat_colour_font + "Get ready!" + reset_font_style)
-            encounter(player_character)
-        else:
-            P_S(
-                description_colour_font
-                + "Moving forward you spot what looks like the stairs to"
-            )
-            P_S("The next level. You are almost at the start of the stairs")
-            P_S("Climbing the startirs is easy, the worn stone under your feet")
-            P_S(
-                "Is smooth. While walking you wondered what happened here.."
-                + reset_font_style
-            )
-    else:
-        print("You need to select a valid action")
+            P_S(description_colour_font + "You need to select a valid option" + reset_font_style)
+            continue
 
 def second_floor_action(player_character):
     """
