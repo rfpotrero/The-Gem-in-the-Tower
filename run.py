@@ -164,7 +164,7 @@ def chance_of_encounter(odds_chance):
 
 def after_combat(player_character):
     """
-    This fuction provides information about of the combat.
+    This function provides information about of the combat.
     """
     P_S(floor_choice_colour + "The fight is over, your heartbeat still pound hard in your chest")
     P_S("you stop for a moment to consider your next move.")
@@ -175,22 +175,29 @@ def after_combat(player_character):
         P_S(description_colour_font + "Not wasting any time you decided to move forward")
         P_S("The path to the next floor seems clear" + reset_font_style)
     elif after_combat_choice == "2":
-        P_S(description_colour_font +  "The adrenaline is fading and the injuries from the last")
-        P_S("The last fight are starting to hurt. You decided to stop before")
-        P_S("they get worse.")
-        P_S("While applying the bandages a sudden sound catch your attention.." + reset_font_style)
-        if chance_of_encounter(40) is True:
-            P_S(description_colour_font + "A monster starts to run towards you!"
+        while player_character.max_health_points > player_character.health_points:
+            P_S(description_colour_font +  
+            "The adrenaline is fading and the injuries from the last")
+            P_S("The last fight are starting to hurt. You decided to stop before")
+            P_S("they get worse.")
+            P_S("While applying the bandages a sudden sound catch your attention.."
+             + reset_font_style)
+            if chance_of_encounter(40) is True:
+                P_S(description_colour_font + "A monster starts to run towards you!"
+                + reset_font_style)
+                P_S(combat_colour_font + "Get ready!" + reset_font_style)
+                player_character.healing_up()
+                print(player_character.health_points)
+                encounter(player_character)
+            else:
+                P_S(description_colour_font + "You hold your breath for a second but nothin happen")
+                P_S("with the wounds bandage you resume your exploration" + reset_font_style)
+                player_character.healing_up()
+                break
+        P_S(description_colour_font +
+        "After a quick check you don't find any injury and keep moving ahead"
             + reset_font_style)
-            P_S(combat_colour_font + "Get ready!" + reset_font_style)
-            player_character.healing_up()
-            print(player_character.health_points)
-            encounter(player_character)
-        else:
-            P_S(description_colour_font + "You hold your breath for a second but nothin happen")
-            P_S("with the wounds bandage you resume your exploration" + reset_font_style)
-            player_character.healing_up()
-            print(player_character.health_points)
+
     else:
         print("You need to select a valid action")
 
@@ -533,6 +540,7 @@ _________          _______   _________ _______           _______  _______
     third_floor_action(player_character)
     final_fight(player_character)
     play_again()
+
 
 
 
