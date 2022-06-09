@@ -79,17 +79,7 @@ def encounter(player_character):
         + reset_font_style
     )
     while monster_alive is True and player_alive is True:
-        player_action = input(
-            combat_colour_font
-            + """Select your action:
-            1- Attack
-            2- Defend
-            3- Heal
-            """
-            + reset_font_style
-        )
-        while player_action not in valid_user_input:
-            print("That is not action you can do!")
+        while True:
             player_action = input(
             combat_colour_font
             + """Select your action:
@@ -99,57 +89,57 @@ def encounter(player_character):
             """
             + reset_font_style
         )
-        if player_action == "1":
-            player_character.character_attack(new_monster)
-            if new_monster.health_points == 0:
-                monster_alive = False
-                P_S(
-                    combat_colour_font
-                    + "With a swift strike the monster falls blood spurting"
-                    + reset_font_style
-                )
-                after_combat(player_character)
-                break
-            P_S( combat_colour_font + "The monster attacks!"
-            + reset_font_style)
-            new_monster.character_attack(player_character)
-            if player_character.health_points == 0:
-                player_alive = False
-                game_over()
-        elif player_action == "2":
-            P_S(combat_colour_font +
-            "You focus on avoiding or blocking attacks, riposting when the chance appears"
-            + reset_font_style)
-            player_character.armour = player_character.armour + 2
-            player_character.attack = player_character.attack - 1
-            player_character.character_attack(new_monster)
-            if new_monster.health_points == 0:
-                monster_alive = False
-                P_S(
-                    combat_colour_font
-                    + "With a swift strike the monster falls blood spurting"
-                    + reset_font_style
-                )
-                after_combat(player_character)
-                break
-            P_S( combat_colour_font + "The monster attacks!"
-            + reset_font_style)
-            new_monster.character_attack(player_character)
-            if player_character.health_points == 0:
-                player_alive = False
-                game_over()
-            player_character.armour = player_character.armour - 2
-            player_character.attack = player_character.attack + 1
-        elif player_action == "3":
-            P_S(combat_colour_font + "Reaching to your pouch you gulp down the red potion"
-            + reset_font_style)
-            player_character.healing_up()
-            new_monster.character_attack(player_character)
-            if player_character.health_points == 0:
-                player_alive = False
-                game_over()
-        else:
-            print("There was an error")
+            if player_action == "1":
+                player_character.character_attack(new_monster)
+                if new_monster.health_points == 0:
+                    monster_alive = False
+                    P_S(
+                        combat_colour_font
+                        + "With a swift strike the monster falls blood spurting"
+                        + reset_font_style
+                    )
+                    after_combat(player_character)
+                    break
+                P_S( combat_colour_font + "The monster attacks!"
+                + reset_font_style)
+                new_monster.character_attack(player_character)
+                if player_character.health_points == 0:
+                    player_alive = False
+                    game_over()
+            elif player_action == "2":
+                P_S(combat_colour_font +
+                "You focus on avoiding or blocking attacks, riposting when the chance appears"
+                + reset_font_style)
+                player_character.armour = player_character.armour + 2
+                player_character.attack = player_character.attack - 1
+                player_character.character_attack(new_monster)
+                if new_monster.health_points == 0:
+                    monster_alive = False
+                    P_S(
+                        combat_colour_font
+                        + "With a swift strike the monster falls blood spurting"
+                        + reset_font_style
+                    )
+                    after_combat(player_character)
+                    break
+                P_S( combat_colour_font + "The monster attacks!"
+                + reset_font_style)
+                new_monster.character_attack(player_character)
+                if player_character.health_points == 0:
+                    player_alive = False
+                    game_over()
+                player_character.armour = player_character.armour - 2
+                player_character.attack = player_character.attack + 1
+            elif player_action == "3":
+                P_S(combat_colour_font + "Reaching to your pouch you gulp down the red potion"
+                + reset_font_style)
+                player_character.healing_up()
+                new_monster.character_attack(player_character)
+                if player_character.health_points == 0:
+                    player_alive = False
+                    game_over()
+            else:
+                continue
 
 def player_alive_check(player_character):
     """
@@ -308,7 +298,6 @@ def final_fight(player_character):
                 final_boss_alive_check(abomination)
     P_S("" + reset_font_style)
 
-
 def first_floor_action(player_character):
     """
     This fuctions will appear only in the first floor for the next floors
@@ -373,7 +362,6 @@ def first_floor_action(player_character):
             )
     else:
         print("You need to select a valid action")
-
 
 def second_floor_action(player_character):
     """
