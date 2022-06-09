@@ -102,9 +102,7 @@ def encounter(player_character):
                 P_S( combat_colour_font + "The monster attacks!"
                 + reset_font_style)
                 new_monster.character_attack(player_character)
-                if player_character.health_points == 0:
-                    player_alive = False
-                    game_over()
+                player_alive_check(player_character)
             elif player_action == "2":
                 P_S(combat_colour_font +
                 "You focus on avoiding or blocking attacks, riposting when the chance appears"
@@ -124,9 +122,7 @@ def encounter(player_character):
                 P_S( combat_colour_font + "The monster attacks!"
                 + reset_font_style)
                 new_monster.character_attack(player_character)
-                if player_character.health_points == 0:
-                    player_alive = False
-                    game_over()
+                player_alive_check(player_character)
                 player_character.armour = player_character.armour - 2
                 player_character.attack = player_character.attack + 1
             elif player_action == "3":
@@ -134,9 +130,7 @@ def encounter(player_character):
                 + reset_font_style)
                 player_character.healing_up()
                 new_monster.character_attack(player_character)
-                if player_character.health_points == 0:
-                    player_alive = False
-                    game_over()
+                player_alive_check(player_character)
             else:
                 continue
 
@@ -154,6 +148,7 @@ def final_boss_alive_check(abomination):
     """
     if abomination.health_points == 0:
         player_final_fight_victory()
+        play_again()
 
 def chance_of_encounter(odds_chance):
     """
@@ -174,18 +169,18 @@ def after_combat(player_character):
     P_S(floor_choice_colour + "The fight is over, your heartbeat still pound hard in your chest")
     P_S("you stop for a moment to consider your next move.")
     P_S("1- Continue moving ahead")
-    P_S("2- Stop and healing")
+    P_S("2- Take a break and heal")
     after_combat_choice = input("What you would do?" + reset_font_style)
     if after_combat_choice == "1":
         P_S(description_colour_font + "Not wasting any time you decided to move forward")
-        P_S("The path to the next floors seems clear" + reset_font_style)
+        P_S("The path to the next floor seems clear" + reset_font_style)
     elif after_combat_choice == "2":
         P_S(description_colour_font +  "The adrenaline is fading and the injuries from the last")
         P_S("The last fight are starting to hurt. You decided to stop before")
         P_S("they get worse.")
         P_S("While applying the bandages a sudden sound catch your attention.." + reset_font_style)
         if chance_of_encounter(40) is True:
-            P_S(description_colour_font + "A monster startsg to run towards you!"
+            P_S(description_colour_font + "A monster starts to run towards you!"
             + reset_font_style)
             P_S(combat_colour_font + "Get ready!" + reset_font_style)
             player_character.healing_up()
@@ -223,7 +218,6 @@ def game_over():
     This function will end the current game when a player health_points
     reach zero and will ask the player if they want to play again.
     """
-    player_death()
     P_S(description_colour_font + "You have died.")
     play_again()
 
