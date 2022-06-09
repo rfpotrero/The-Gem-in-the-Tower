@@ -55,7 +55,12 @@
     ![combatoption2](assets/images/test_cases/combatoption2.png)
     - **Passed**: Action three is recognised by the program and additional validation is done to check if the health points are currently at maxium 
     ![combatoption3](assets/images/test_cases/combatoption3.png)
-    
+* User can choose to explore for a chance of getting a reward
+  - Expected behaviour: A user can select one or two in order to continue or risk an encounter to gain a reward. 
+    - **Passed**: Validation is successful, only 1 or 2 are valid options. 
+    ![flooractionvalidation](assets/images/test_cases/flooractionvalidation.png)
+    - **Passed**: After selecting the option to continue searching an encounter is triggered
+    ![flooractionvalidation2](assets/images/test_cases/flooractionvalidation2.png)
 * User selects what happen after a fight
   - Expected behaviout: After a fight the user can continue or recover their health point (1, 2). Recovering the health points have 40% chance of trigger an encounter.
     - **Pass**: The after fight menu appears after the fight ends and the player have over 0 Health Points
