@@ -12,13 +12,14 @@
 * This diagram shows the basic skeleton of the program and the minium objectives that the project should deliver. This is a functionnal yet basic game.
 ![FirstMilestone](assets/images/first_milestone.png)
 ### Complete Flow Diagram
-* The complete diagram shows below display final flow of the game. Uses the skeleton in the first milestone but expand it allowing the player to take actions and randomly triggering encounters depending on the users input. The game also include descriptions for each floor and store those descriptions in a functions.py file to freely modifying or expand without impacting the core functionalities.
+* The complete diagram shows below display final flow of the game. Uses the skeleton in the first milestone but expand it allowing the player to take actions and randomly triggering encounters depending on the users input. 
+* The descriptions for each floor are decoupled and store those descriptions in a functions.py file to allow modifying or expand without impacting the core functionalities.
 ![Final_Diagram](assets/images/complete_flow_diagram.png)
 ## Features
 * Playing a game.
 * Select the action while fighting. 
 * Select the action after a fight happen.
-* Choose beteween continue or explore to get rewards.
+* Choose beteween continue or explore for a chance of get a reward.
 * Complete the game by defeating the final boss.
 ## Future features
 * Introduce different type of rooms 
@@ -69,10 +70,12 @@
     ![endingtext](assets/images/test_cases/endingtext.png)
 * The game end when the user Health Points reach zero
   - If at any point the player's Health Point reach zero the game end inmediatly displaying the game over message. 
+    - **Passed**: When the player reach zero health points the game ends displaying the game over message. 
+    ![gameover](assets/images/test_cases/gameover.png)
 ## Code validation
 * Python Coding validation
 ## Fixed bugs
-* Fixing bug UnboundLocalError in attack_roll function [Issue](https://github.com/rfpotrero/The-Gem-in-the-Tower/issues/21)
+* Fixing bug UnboundLocalError in attack_roll function [Issue21](https://github.com/rfpotrero/The-Gem-in-the-Tower/issues/21)
 * Fix input validation in encounter funciton [Issue27](https://github.com/rfpotrero/The-Gem-in-the-Tower/issues/27)
 ## Deployment
 * Heroku Deployment 
