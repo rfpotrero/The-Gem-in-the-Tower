@@ -155,7 +155,7 @@ def player_alive_check(player_character):
     """
     Check if the player is still above zero health points after a monster attack
     """
-    if player_character.health_points == 0: 
+    if player_character.health_points == 0:
         player_death()
         game_over()
 
@@ -210,6 +210,25 @@ def after_combat(player_character):
     else:
         print("You need to select a valid action")
 
+def play_again():
+    """
+    Presents the user with the option to play again.
+    """
+    while True:
+        P_S( description_colour_font + "Do you want to play again?")
+        game_over_option = input(
+        """
+        1- Play again
+        2- Quit
+        """
+        + reset_font_style)
+        if game_over_option == "1":
+            main()
+        elif game_over_option == "2":
+            exit()
+        else:
+            continue
+
 def game_over():
     """
     This function will end the current game when a player health_points
@@ -217,19 +236,7 @@ def game_over():
     """
     player_death()
     P_S(description_colour_font + "You have died.")
-    P_S("Do you have to play again?")
-    game_over_option = input(
-        """
-    1- Play again
-    2- Quit
-    """
-    + reset_font_style)
-    if game_over_option == "1":
-        main()
-    elif game_over_option == "2":
-        exit()
-    else:
-        print("Please select a valid option")
+    play_again()
 
 def final_fight(player_character):
     """
@@ -429,7 +436,6 @@ def second_floor_action(player_character):
         )
         P_S("" + reset_font_style)
 
-
 def third_floor_action(player_character):
     """
     Third floor description
@@ -489,7 +495,6 @@ def third_floor_action(player_character):
         P_S("leaving behind richeness beyong your wildest dreams")
         P_S("" + reset_font_style)
 
-
 def main():
 
     """
@@ -546,6 +551,7 @@ _________          _______   _________ _______           _______  _______
     thrid_floor()
     third_floor_action(player_character)
     final_fight(player_character)
+    play_again()
 
 
 
