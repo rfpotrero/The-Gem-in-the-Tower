@@ -70,7 +70,6 @@ def encounter(player_character):
 
     monster_alive = True
     player_alive = True
-    valid_user_input = ("1","2","3")
 
 
     P_S(
