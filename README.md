@@ -93,8 +93,9 @@
   - Once that is completed. Click in Deploy
     - In Deploy Method clink under GitHub 
     - Connect your Github repository to Heroku
-    - At the bottom under Manual Deployment select the Branch you want to deploy. Most likely main
+    - At the bottom under Manual Deployment select the Branch you want to deploy. Main by default
     - Click in Deploy Branch
+    - Click in the View button to open deployed app.
 * Local deployment
   - Execute in terminal node index.js inside the project's folder
   - If there is any errors we will need to install further modules. The most common total, in the terminal entry npm install total
@@ -102,3 +103,5 @@
   - By default it uses local host port 8000 . Navigate in your browser to http://localhost:8000/ 
   - Click in run program if the program do not start automatically
 ## Credits
+* Base code for input validation [Stackoverflow](https://stackoverflow.com/questions/23294658/asking-the-user-for-input-until-they-give-a-valid-response)
+* Basecode for the chance_of_encounter function [Datacamp](https://www.datacamp.com/tutorial/statistics-python-tutorial-probability-1)
