@@ -8,6 +8,7 @@ from colored import fg, attr
 
 title_colour_font = fg(69)
 description_colour_font = fg(191)
+description_colour_font_2 = fg(193)
 floor_choice_colour = fg(214)
 combat_colour_font = fg(125)
 reset_font_style = attr(0)
@@ -21,7 +22,7 @@ def P_S(text):
 
     Credits to Deanna Carina https://github.com/DeannaCarina/StarTrekTimeLoop/blob/main/functions.py
     I have slightly change the function to hardcoding the time parameters.
-    Args: 
+    Args:
         text (string): This is the string that will be displaying line by line.
     """
     print(text)
@@ -32,6 +33,7 @@ def intro():
     """
     Displays the game game intro
     """
+    P_S("")
     P_S(description_colour_font + "The rest of your crew are missing or dead.")
     P_S("The few that survived the strom most likely did not survived the jungle")
     P_S("The tower is the only human construction you can see since days")
@@ -46,7 +48,7 @@ def first_floor():
     """
 
     P_S(
-        description_colour_font
+        description_colour_font_2
         + "The gates of the city towering before you. The walls are empty"
     )
     P_S("No sentinels, no people just the eerie silence around you.")
@@ -106,6 +108,7 @@ def final_fight_description():
     P_S("Human skink decorates the walls as terribles tapestries and in the middle")
     P_S("A column of twisted flesh rises with the gem on top")
     P_S("You can make the faces and limbs in that horrendous construction")
+    P_S("")
     P_S("Before you, the guardian of this terrible room starts to rise. An abomination")
     P_S("The monstrous creature wears human remains as an improvised armor")
     P_S("Moving towards you a blade of bone appears from what looks like their arm")

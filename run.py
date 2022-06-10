@@ -16,7 +16,8 @@ from functions import (
 )
 
 title_colour_font = fg(69)
-description_colour_font = fg(191)
+description_colour_font= fg(191)
+description_colour_font_2 = fg(193)
 floor_choice_colour = fg(214)
 combat_colour_font = fg(124)
 reset_font_style = attr(0)
@@ -178,7 +179,6 @@ def player_alive_check(player_character):
         player_death()
         game_over()
 
-
 def final_boss_alive_check(abomination):
     """
     Check if the final boss is still above zero health points after a player's attack
@@ -189,7 +189,6 @@ def final_boss_alive_check(abomination):
     if abomination.health_points == 0:
         player_final_fight_victory()
         play_again()
-
 
 def chance_of_encounter(odds_chance):
     """
@@ -208,7 +207,6 @@ def chance_of_encounter(odds_chance):
     if probability <= odds_chance:
         return True
 
-
 def after_combat(player_character):
     """
     This function provides information about of the combat.
@@ -223,17 +221,17 @@ def after_combat(player_character):
     P_S("you stop for a moment to consider your next move.")
     P_S("1- Continue moving ahead")
     P_S("2- Take a break and heal")
-    after_combat_choice = input("What you would do?" + reset_font_style)
+    after_combat_choice = input("What do you want to do?" + reset_font_style)
     if after_combat_choice == "1":
         P_S(
-            description_colour_font + "Not wasting any time you decided to move forward"
+            description_colour_font_2 + "Not wasting any time you decided to move forward"
         )
         P_S("The path to the next floor seems clear" + reset_font_style)
     elif after_combat_choice == "2":
         while True:
             if player_character.max_health_points > player_character.health_points:
                 P_S(
-                    description_colour_font
+                    description_colour_font_2
                     + "The adrenaline is fading and the injuries from the last"
                 )
                 P_S("fight are starting to hurt. You decided to stop before")
@@ -254,7 +252,7 @@ def after_combat(player_character):
                     break
                 else:
                     P_S(
-                        description_colour_font
+                        description_colour_font_2
                         + "You hold your breath for a second but nothing happen"
                     )
                     P_S(
@@ -264,7 +262,7 @@ def after_combat(player_character):
                     player_character.healing_up()
                     break
             P_S(
-                description_colour_font
+                description_colour_font_2
                 + "After a quick check you don't find any injury and keep moving ahead"
                 + reset_font_style
             )
@@ -272,7 +270,6 @@ def after_combat(player_character):
 
         else:
             print("You need to select a valid action")
-
 
 def play_again():
     """
@@ -295,7 +292,6 @@ def play_again():
         else:
             continue
 
-
 def game_over():
     """
     This function will end the current game when a player health_points
@@ -303,7 +299,6 @@ def game_over():
     """
     P_S(description_colour_font + "You have died.")
     play_again()
-
 
 def final_fight(player_character):
     """
@@ -432,7 +427,7 @@ def first_floor_action(player_character):
                     encounter(player_character)
                 else:
                     P_S(
-                        description_colour_font
+                        description_colour_font_2
                         + "You were ready to give up and complain about wasting time"
                     )
                     P_S("While a bright blade caught your eye a quick cleaning")
@@ -471,7 +466,6 @@ def first_floor_action(player_character):
             )
             continue
 
-
 def second_floor_action(player_character):
     """
     Third floor action description. This present the player with a choice of continue exploring
@@ -482,7 +476,7 @@ def second_floor_action(player_character):
         It is the player and will be persistent until the end of the game.
     """
     P_S(
-        description_colour_font
+        description_colour_font_2
         + "Wandering through the dead city you spot the familiar sign of a smith"
     )
     P_S("It is a massive building the big forges are now dark and dead but")
@@ -491,7 +485,7 @@ def second_floor_action(player_character):
     P_S("it will make you take a detour and add a few hours...would it be worthy it?")
     P_S("" + reset_font_style)
     while True:
-        P_S(floor_choice_colour + "What you would?")
+        P_S(floor_choice_colour + "What do you want to do?")
         second_floor_choice = input(
             """
         1- Enter the forge
@@ -503,7 +497,7 @@ def second_floor_action(player_character):
             if second_floor_choice == "1":
                 if chance_of_encounter(50) is True:
                     P_S(
-                        description_colour_font + "The makeshift torch holds the darkness at bay"
+                        description_colour_font_2 + "The makeshift torch holds the darkness at bay"
                     )
                     P_S("hammers and anvils are starting to rust, some still have the pieces")
                     P_S("of steel over there as if waiting to be completed...")
@@ -513,7 +507,7 @@ def second_floor_action(player_character):
                     encounter(player_character)
                 else:
                     P_S(
-                        description_colour_font + "The makeshift torch holds the darkness at bay"
+                        description_colour_font_2 + "The makeshift torch holds the darkness at bay"
                     )
                     P_S("hammers and anvils are starting to rust, some still have the pieces")
                     P_S("of steel over there as if waiting to be completed...")
@@ -529,7 +523,7 @@ def second_floor_action(player_character):
                     player_character.armour = player_character.armour + 2
             elif second_floor_choice == "2":
                 P_S(
-                    description_colour_font
+                    description_colour_font_2
                     + "You left the building behind an continue to move towards the main street"
                 )
                 P_S(
@@ -558,7 +552,7 @@ def third_floor_action(player_character):
         It is the player and will be persistent until the end of the game.
     """
     P_S(
-        description_colour_font
+        description_colour_font_2
         + "The glittering of jewels makes you stop in your heels, the riches in this"
     )
     P_S(
@@ -579,7 +573,7 @@ def third_floor_action(player_character):
             if third_floor_choice == "1":
                 if chance_of_encounter(50) is True:
                     P_S(
-                        description_colour_font
+                        description_colour_font_2
                         + "Your eyes can't believe the amount of diamonds, ruby and other"
                     )
                     P_S("many precious stones in the same room. You are roaming day dreaming")
@@ -592,7 +586,7 @@ def third_floor_action(player_character):
                     encounter(player_character)
                 else:
                     P_S(
-                        description_colour_font
+                        description_colour_font_2
                         + "Your eyes can't believe the amount of diamonds, ruby and other"
                     )
                     P_S("many precious stones in the same room. You are roaming day dreaming")
@@ -607,7 +601,7 @@ def third_floor_action(player_character):
                     player_character.health_points = player_character.health_points + 1
             else:
                 P_S(
-                    description_colour_font
+                    description_colour_font_2
                     + "You are no here for this! The final prize will all of this like a cheap"
                 )
                 P_S("glass and tin copy. Steeling yourself you push forward to the stair")
