@@ -397,15 +397,15 @@ def first_floor_action(player_character):
     """
     P_S(
         description_colour_font
-        + "Dust cover everything in the halls, market stall appear abandod"
+        + "Dust covers everything in the halls, market stalls appear abandoned"
     )
     P_S("As if they all left in a rush")
     P_S("The halls might have something of value")
     P_S("" + reset_font_style)
     while True:
         P_S(floor_choice_colour + "What do you want to do?")
-        P_S("1- Search and Prepare")
-        P_S("2- Continue climbin the tower")
+        P_S("1- Search the stalls")
+        P_S("2- Continue climbing the tower")
         first_floor_choice = input("" + reset_font_style)
         if first_floor_choice in ("1","2"):
             if first_floor_choice == "1":
@@ -414,18 +414,18 @@ def first_floor_action(player_character):
                         description_colour_font
                         + "While searching for anything of value the sound"
                     )
-                    P_S("a sudden cry pierced the silence and you turn just in")
+                    P_S("a sudden cry pierces the silence and you turn just in time")
                     P_S("to see a strange creature charging!" + reset_font_style)
                     P_S(combat_colour_font + "Get ready!" + reset_font_style)
                     encounter(player_character)
                 else:
                     P_S(
                         description_colour_font
-                        + "You were ready to give up and complaint about wasting time"
+                        + "You were ready to give up and complain about wasting time"
                     )
                     P_S("While a bright blade caught your eye a quick cleaning")
                     P_S("Reveals an extraordinary weapon that will surely help")
-                    P_S("on what you will facing ahead.")
+                    P_S("on what you will face ahead.")
                     P_S("" + reset_font_style)
                     player_character.attack = player_character.attack + 2
             elif first_floor_choice == "2":
@@ -435,7 +435,7 @@ def first_floor_action(player_character):
                         + "Moving forward you spot what looks like the stairs to"
                     )
                     P_S("The next level. You are almost at the start of the stairs")
-                    P_S("When the clash and metal and stone draw you attention")
+                    P_S("When the clash and metal and stone draw your attention")
                     P_S("A lonely creature is approaching..." + reset_font_style)
                     P_S(combat_colour_font + "Get ready!" + reset_font_style)
                     encounter(player_character)
@@ -445,7 +445,7 @@ def first_floor_action(player_character):
                         + "Moving forward you spot what looks like the stairs to"
                     )
                     P_S("The next level. You are almost at the start of the stairs")
-                    P_S("Climbing the startirs is easy, the worn stone under your feet")
+                    P_S("Climbing the stairs is easy, the worn stone under your feet")
                     P_S(
                         "Is smooth. While walking you wondered what happened here.."
                         + reset_font_style
@@ -471,12 +471,12 @@ def second_floor_action(player_character):
     """
     P_S(
         description_colour_font
-        + "Wandering through the dead city you spot the familiar sing of a smith"
+        + "Wandering through the dead city you spot the familiar sign of a smith"
     )
-    P_S("It is massive building the big forges now dark and dead but")
+    P_S("It is a massive building the big forges are now dark and dead but")
     P_S("you can easily imagine how busy this building and the sound of hammering")
     P_S("There might be some items left behind inside the massive building")
-    P_S("it will make you take a detour and add a few hours...would it be worhty?")
+    P_S("it will make you take a detour and add a few hours...would it be worthy it?")
     P_S("" + reset_font_style)
     while True:
         P_S(floor_choice_colour + "What you would?")
@@ -491,24 +491,24 @@ def second_floor_action(player_character):
             if second_floor_choice == "1":
                 if chance_of_encounter(50) is True:
                     P_S(
-                        description_colour_font + "The makeshift torch hold the darkness at bay"
+                        description_colour_font + "The makeshift torch holds the darkness at bay"
                     )
-                    P_S("hammers and anvil are starting to rust some still have the pieces")
+                    P_S("hammers and anvils are starting to rust, some still have the pieces")
                     P_S("of steel over there as if waiting to be completed...")
-                    P_S("Suddenly your hair stand up on the back of your neck a pair")
+                    P_S("Suddenly your hair stands up on the back of your neck a pair")
                     P_S("of eyes glow in the darkness getting closer..." + reset_font_style)
                     P_S(combat_colour_font + "Get Ready!" + reset_font_style)
                     encounter(player_character)
                 else:
                     P_S(
-                        description_colour_font + "The makeshift torch hold the darkness at bay"
+                        description_colour_font + "The makeshift torch holds the darkness at bay"
                     )
-                    P_S("hammers and anvil are starting to rust some still have the pieces")
+                    P_S("hammers and anvils are starting to rust, some still have the pieces")
                     P_S("of steel over there as if waiting to be completed...")
-                    P_S("Suddenly your hair stand up on the back of your neck a pair")
+                    P_S("Suddenly your hair stands up on the back of your neck a pair")
                     P_S("You turn with your weapon ready....")
-                    P_S("a quite laugh escape your lips. What looked like enemies is a row")
-                    P_S("of armour stands..getting closer this marvelous craft still is usable")
+                    P_S("a quiet laugh escapes your lips. What looked like enemies is a row")
+                    P_S("of armor stands..getting closer this marvelous craft still is usable")
                     P_S(
                         "You spot a shield the surface smooth and dusty but the straps are sturdy"
                     )
@@ -571,9 +571,9 @@ def third_floor_action(player_character):
                         + "Your eyes can't believe the amount of diamonds, ruby and other"
                     )
                     P_S("many precious stones in the same room. You are roaming day dreaming")
-                    P_S("about pack your bags with as many jewels and have a good life")
+                    P_S("about packing your bags with as many jewels and have a good life")
                     P_S("your hand is almost reaching to an exquisite crown when")
-                    P_S("a gurgling noise raise from the end of the shop followed by a")
+                    P_S("a gurgling noise rises from the end of the shop followed by a")
                     P_S("create stumbling towards you")
                     P_S("" + reset_font_style)
                     P_S(combat_colour_font + "Get ready!" + reset_font_style)
@@ -584,22 +584,22 @@ def third_floor_action(player_character):
                         + "Your eyes can't believe the amount of diamonds, ruby and other"
                     )
                     P_S("many precious stones in the same room. You are roaming day dreaming")
-                    P_S("about pack your bags with as many jewels and have a good life.")
+                    P_S("about packing your bags with as many jewels and have a good life.")
                     P_S(
-                        "Wandering the room you endup in front a display with a ring in the center"
+                        "Wandering the room you endup in front of a display with a ring in the center"
                     )
-                    P_S("you can swear that the ring glows but is hard to tell you reach for")
+                    P_S("you can swear that the ring glows but it is hard to tell. You reach for")
                     P_S("the ring. It feels warm and comforting in your hand. Suddenly the")
-                    P_S("the old and new injuries seems to hurt less..")
+                    P_S("the old and new injuries seem to hurt less..")
                     P_S("" + reset_font_style)
                     player_character.health_points = player_character.health_points + 1
             else:
                 P_S(
                     description_colour_font
-                    + "You are no here for this! The final prize will make looks this like a cheap"
+                    + "You are no here for this! The final prize will all of this like a cheap"
                 )
                 P_S("glass and tin copy. Steeling yourself you push forward to the stair")
-                P_S("leaving behind richeness beyong your wildest dreams")
+                P_S("leaving behind richness beyong your wildest dreams")
                 P_S("" + reset_font_style)
             break
         else:
