@@ -1,4 +1,5 @@
 ## Purpose of the project
+![banner](assets/images/banner.png)
 * The Gem in the Tower is an old school adventure text base. It will be used to practice python and apply OOP principles
 * The purpose of the game is to ascend the tower and reclaim the Gem from the final enemy.
 ## User stories
@@ -22,8 +23,8 @@
 * Choose between continuing or exploring for a chance of getting a reward.
 * Complete the game by defeating the final boss.
 ## Future features
-* Introduce different type of rooms 
-* Introduce different type of monsters
+* Introduce different type of floors and descriptions. This will achieve by creating a floor class.
+* Introduce different type of monsters. This will be done by creating a subclass of the player class.
 ## Technology
 * Python 
   - The programming language for this exercise is Python.
@@ -78,7 +79,7 @@
     - **Passed**: When the player reaches zero health points the game ends displaying the game over message. 
     ![gameover](assets/images/test_cases/gameover.png)
 ## Code validation
-* Python Coding validation
+* Python Coding validation. The code run without returning any error and no erros are flagged in pyling
 ## Fixed bugs
 * Fixing bug UnboundLocalError in attack_roll function [Issue21](https://github.com/rfpotrero/The-Gem-in-the-Tower/issues/21)
 * Fix input validation in encounter function [Issue27](https://github.com/rfpotrero/The-Gem-in-the-Tower/issues/27)

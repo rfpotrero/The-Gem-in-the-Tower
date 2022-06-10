@@ -82,11 +82,11 @@ def thrid_floor():
     P_S("")
     P_S(
         description_colour_font
-        + "The climb ends up in a patio that even if it has seen better day"
+        + "The stair ends up in a patio that even if it has seen better day"
     )
     P_S("still you can tell it was constructed with the most expensive materials")
     P_S("rich marmol and jade mosaics cover the walls.")
-    P_S("This probably is where the rulers and rich used to live")
+    P_S("This is where the rulers and rich used to live")
     P_S("Massive villas can be seen in the distance and what is probably")
     P_S("the access to the top of the tower. A massive stair of white stone")
     P_S("reflecting the light that enters through huge windows")
@@ -139,7 +139,7 @@ def game_ending_description():
     Game ending description
     """
     P_S(
-        description_colour_font
+        description_colour_font_2
         + "The gem shines in front of you. The legends were right!")
     P_S("The facets reflect the light in impossible shapes")
     P_S("With this you could buy entire kingdoms. The gem is light and strangely")

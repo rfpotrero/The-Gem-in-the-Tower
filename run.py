@@ -286,8 +286,10 @@ def play_again():
             + reset_font_style
         )
         if game_over_option == "1":
+            P_S("")
             main()
         elif game_over_option == "2":
+            P_S(description_colour_font_2+ "Thanks for playing! Goodbye!" + reset_font_style)
             exit()
         else:
             continue
@@ -433,6 +435,7 @@ def first_floor_action(player_character):
                     P_S("While a bright blade caught your eye a quick cleaning")
                     P_S("Reveals an extraordinary weapon that will surely help")
                     P_S("on what you will face ahead.")
+                    P_S("You continue moving forward on your quest.")
                     P_S("" + reset_font_style)
                     player_character.attack = player_character.attack + 2
             elif first_floor_choice == "2":
@@ -553,10 +556,10 @@ def third_floor_action(player_character):
     """
     P_S(
         description_colour_font_2
-        + "The glittering of jewels makes you stop in your heels, the riches in this"
+        + "The glittering of jewels makes you stop on your heels, the riches here"
     )
     P_S(
-        "will be enough to live a life of comfort but that is not what you are here for"
+        "will be enough to live a life of comfort, but that is not what you are here for!"
         + reset_font_style
     )
     while True:
