@@ -236,7 +236,7 @@ def after_combat(player_character):
                     description_colour_font
                     + "The adrenaline is fading and the injuries from the last"
                 )
-                P_S("The last fight are starting to hurt. You decided to stop before")
+                P_S("fight are starting to hurt. You decided to stop before")
                 P_S("they get worse.")
                 P_S(
                     "While applying the bandages a sudden sound catch your attention.."
