@@ -616,9 +616,9 @@ def third_floor_action(player_character):
             else:
                 P_S(
                     description_colour_font_2
-                    + "You are no here for this! The final prize will all of this like a cheap"
+                    + "You are no here for this! The final prize will make all of these look like"
                 )
-                P_S("glass and tin copy. Steeling yourself you push forward to the stair")
+                P_S("a cheap glass and tin copy. Steeling yourself you push forward to the stair")
                 P_S("leaving behind richness beyong your wildest dreams")
                 P_S("" + reset_font_style)
             break
