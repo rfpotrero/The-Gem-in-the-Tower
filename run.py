@@ -340,11 +340,12 @@ def final_fight(player_character):
             abomination.armour = abomination.armour - 2
             P_S(
                 combat_colour_font
-                + "Moving before the abomination you attack!"
+                + "You move before the abomination and attack!"
                 + reset_font_style
             )
             player_character.character_attack(abomination)
             final_boss_alive_check(abomination)
+            P_S( combat_colour_font + "The abomination attack!" + reset_font_style)
             abomination.character_attack(player_character)
             abomination.armour = abomination.armour + 2
             player_alive_check(player_character)
@@ -355,34 +356,43 @@ def final_fight(player_character):
                 + reset_font_style
             )
             abomination.attack = abomination.attack - 1
+            P_S( combat_colour_font + "The abomination attack!" + reset_font_style)
             abomination.character_attack(player_character)
             player_alive_check(player_character)
             abomination.attack = abomination.attack + 1
+            P_S( combat_colour_font + "You attack!" + reset_font_style)
             player_character.character_attack(abomination)
             final_boss_alive_check(abomination)
         elif boss_attack == "defend":
             abomination.armour = abomination.armour + 2
-            P_S(combat_colour_font + "The abomination defend itself" + reset_font_style)
+            P_S(combat_colour_font + "The abomination is retreating!" + reset_font_style)
+            P_S( combat_colour_font + "You attack!" + reset_font_style)
             player_character.character_attack(abomination)
             final_boss_alive_check(abomination)
+            P_S( combat_colour_font + "The abomination attack!" + reset_font_style)
             abomination.character_attack(player_character)
             player_alive_check(player_character)
             abomination.armour = abomination.armour - 2
             abomination.attack = abomination.attack + 2
         elif player_choice == "3":
+            P_S(combat_colour_font + "The abomination is retreating!" + reset_font_style)
             abomination.character_attack(player_character)
             player_character.healing_up()
         else:
             if boss_attack == "powerful attack":
                 abomination.attack = abomination.attack + 2
+                P_S( combat_colour_font + "You attack!" + reset_font_style)
                 player_character.character_attack(abomination)
                 final_boss_alive_check(abomination)
+                P_S(combat_colour_font + "The abomination is retreating!" + reset_font_style)
                 abomination.character_attack(player_character)
                 player_alive_check(player_character)
                 abomination.attack = abomination.attack - 2
             if boss_attack == "fast attack":
+                P_S( combat_colour_font + "The abomination attack!" + reset_font_style)
                 abomination.character_attack(player_character)
                 player_alive_check(player_character)
+                P_S( combat_colour_font + "You attack!" + reset_font_style)
                 player_character.character_attack(abomination)
                 final_boss_alive_check(abomination)
     P_S("" + reset_font_style)
@@ -659,13 +669,13 @@ _________          _______   _________ _______           _______  _______
                 + reset_font_style
             )
 
-    # intro()
-    # first_floor()
-    # first_floor_action(player_character)
-    # second_floor()
-    # second_floor_action(player_character)
-    # thrid_floor()
-    # third_floor_action(player_character)
+    intro()
+    first_floor()
+    first_floor_action(player_character)
+    second_floor()
+    second_floor_action(player_character)
+    thrid_floor()
+    third_floor_action(player_character)
     final_fight(player_character)
     play_again()
 
