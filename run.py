@@ -230,46 +230,48 @@ def after_combat(player_character):
         )
         P_S("The path to the next floor seems clear" + reset_font_style)
     elif after_combat_choice == "2":
-        while player_character.max_health_points > player_character.health_points:
+        while True:
+            if player_character.max_health_points > player_character.health_points:
+                P_S(
+                    description_colour_font
+                    + "The adrenaline is fading and the injuries from the last"
+                )
+                P_S("The last fight are starting to hurt. You decided to stop before")
+                P_S("they get worse.")
+                P_S(
+                    "While applying the bandages a sudden sound catch your attention.."
+                    + reset_font_style
+                )
+                if chance_of_encounter(40) is True:
+                    P_S(
+                        description_colour_font
+                        + "A monster starts to run towards you!"
+                        + reset_font_style
+                    )
+                    P_S(combat_colour_font + "Get ready!" + reset_font_style)
+                    player_character.healing_up()
+                    encounter(player_character)
+                    break
+                else:
+                    P_S(
+                        description_colour_font
+                        + "You hold your breath for a second but nothing happen"
+                    )
+                    P_S(
+                        "with the wounds bandage you resume your exploration"
+                        + reset_font_style
+                    )
+                    player_character.healing_up()
+                    break
             P_S(
                 description_colour_font
-                + "The adrenaline is fading and the injuries from the last"
-            )
-            P_S("The last fight are starting to hurt. You decided to stop before")
-            P_S("they get worse.")
-            P_S(
-                "While applying the bandages a sudden sound catch your attention.."
+                + "After a quick check you don't find any injury and keep moving ahead"
                 + reset_font_style
             )
-            if chance_of_encounter(40) is True:
-                P_S(
-                    description_colour_font
-                    + "A monster starts to run towards you!"
-                    + reset_font_style
-                )
-                P_S(combat_colour_font + "Get ready!" + reset_font_style)
-                player_character.healing_up()
-                print(player_character.health_points)
-                encounter(player_character)
-            else:
-                P_S(
-                    description_colour_font
-                    + "You hold your breath for a second but nothin happen"
-                )
-                P_S(
-                    "with the wounds bandage you resume your exploration"
-                    + reset_font_style
-                )
-                player_character.healing_up()
-                break
-        P_S(
-            description_colour_font
-            + "After a quick check you don't find any injury and keep moving ahead"
-            + reset_font_style
-        )
+            break
 
-    else:
-        print("You need to select a valid action")
+        else:
+            print("You need to select a valid action")
 
 
 def play_again():
@@ -586,7 +588,7 @@ def third_floor_action(player_character):
                     P_S("many precious stones in the same room. You are roaming day dreaming")
                     P_S("about packing your bags with as many jewels and have a good life.")
                     P_S(
-                        "Wandering the room you endup in front of a display with a ring in the center"
+                    "Wandering the room you endup in front of a display with a ring in the center"
                     )
                     P_S("you can swear that the ring glows but it is hard to tell. You reach for")
                     P_S("the ring. It feels warm and comforting in your hand. Suddenly the")
@@ -657,13 +659,13 @@ _________          _______   _________ _______           _______  _______
                 + reset_font_style
             )
 
-    intro()
-    first_floor()
-    first_floor_action(player_character)
-    second_floor()
-    second_floor_action(player_character)
-    thrid_floor()
-    third_floor_action(player_character)
+    # intro()
+    # first_floor()
+    # first_floor_action(player_character)
+    # second_floor()
+    # second_floor_action(player_character)
+    # thrid_floor()
+    # third_floor_action(player_character)
     final_fight(player_character)
     play_again()
 
