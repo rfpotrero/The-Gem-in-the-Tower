@@ -226,7 +226,8 @@ def after_combat(player_character):
         P_S(
             description_colour_font_2 + "Not wasting any time you decided to move forward"
         )
-        P_S("The path to the next floor seems clear" + reset_font_style)
+        P_S("The path to the next floor seems clear")
+        P_S("" + reset_font_style)
     elif after_combat_choice == "2":
         while True:
             if player_character.max_health_points > player_character.health_points:
