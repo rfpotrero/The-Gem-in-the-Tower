@@ -219,9 +219,14 @@ def after_combat(player_character):
         + "The fight is over, your heartbeat still pound hard in your chest"
     )
     P_S("you stop for a moment to consider your next move.")
-    P_S("1- Continue moving ahead")
-    P_S("2- Take a break and heal")
-    after_combat_choice = input("What do you want to do?" + reset_font_style)
+    P_S("What do you want to do?")
+    after_combat_choice = input(
+        """
+    1- Continue moving ahead
+    2- Take a break and heal
+    """
+        + reset_font_style
+    )
     if after_combat_choice == "1":
         P_S(
             description_colour_font_2 + "Not wasting any time you decided to move forward"
@@ -446,7 +451,7 @@ def first_floor_action(player_character):
             elif first_floor_choice == "2":
                 if chance_of_encounter(50) is True:
                     P_S(
-                        description_colour_font
+                        description_colour_font_2
                         + "Moving forward you spot what looks like the stairs to"
                     )
                     P_S("The next level. You are almost at the start of the stairs")
@@ -456,7 +461,7 @@ def first_floor_action(player_character):
                     encounter(player_character)
                 else:
                     P_S(
-                        description_colour_font
+                        description_colour_font_2
                         + "Moving forward you spot what looks like the stairs to"
                     )
                     P_S("The next level. You are almost at the start of the stairs")
@@ -465,6 +470,7 @@ def first_floor_action(player_character):
                         "Is smooth. While walking you wondered what happened here.."
                         + reset_font_style
                     )
+                    P_S("")
             break
         else:
             P_S(
@@ -667,7 +673,7 @@ _________          _______   _________ _______           _______  _______
             break
         else:
             print(
-                "I am afraid do not understsand that. Can you say it again?"
+                "I am afraid I only understsand letters"
                 + reset_font_style
             )
 
