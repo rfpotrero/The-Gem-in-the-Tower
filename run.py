@@ -413,9 +413,13 @@ def first_floor_action(player_character):
     P_S("" + reset_font_style)
     while True:
         P_S(floor_choice_colour + "What do you want to do?")
-        P_S("1- Search the stalls")
-        P_S("2- Continue climbing the tower")
-        first_floor_choice = input("" + reset_font_style)
+        first_floor_choice = input(
+            """
+        1- Search the stalls
+        2- Continue your quest!
+        """
+            + reset_font_style
+        )
         if first_floor_choice in ("1","2"):
             if first_floor_choice == "1":
                 if chance_of_encounter(50) is True:
